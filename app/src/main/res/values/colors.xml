@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#53BEC4</color>
+    <color name="colorPrimaryDark">#419096</color>
+    <color name="colorAccent">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_pres">#EBEBEB</color>
+    <color name="black">#000000</color>
+    <color name="black_semi_transparent">#99000000</color>
+    <color name="activo">#B2FF5D</color>
+    <color name="inactivo">#FF4343</color>
+    <color name="advertencia">#F7FF15</color>
+    <color name="gris">#9E9E9E</color>
+    <color name="utilidades">#8ED6FF</color>
+    <color name="utilidades2">#FF4D4D</color>
+    <color name="click">#0DA7FF</color>
+    <color name="green">#00DB49</color>
+
+</resources>

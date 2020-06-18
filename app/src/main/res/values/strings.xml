@@ -1,0 +1,281 @@
+<resources>
+    <string name="app_name">Claudia Z Administración</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="inicio">Inicio</string>
+    <string name="inventario">Inventario</string>
+    <string name="administrar">Administrar</string>
+    <string name="home">Home</string>
+    <string name="nombre_del_item">Nombre del Item</string>
+    <string name="compra">Compra</string>
+    <string name="venta">Venta</string>
+    <string name="color_del_item">Color del item</string>
+    <string name="dimenciones">Dimenciones</string>
+    <string name="id_del_item">Id del Item</string>
+    <string name="nuevo_producto">NUEVO PRODUCTO</string>
+    <string name="nombre_del_producto">Nombre del producto</string>
+    <string name="cancelar">CANCELAR</string>
+    <string name="add_producto">AÑADIR PRODUCTO</string>
+    <string name="categoria_producto_nuevo">categoria_producto_nuevo</string>
+    <string name="estado_del_item">Estado del item</string>
+    <string name="color_del_producto">Color del producto</string>
+    <string name="cantidad_de_productos">Cantidad de productos</string>
+    <string name="descripcion">Descripción</string>
+    <string name="categoria">Categoria</string>
+
+    <string-array name="Linea1">
+        <item>PANTITLAN</item>
+        <item>ZARAGOZA</item>
+        <item>GÓMEZ DARIAS</item>
+        <item>BOULEVARD PUERTO AEREO</item>
+        <item>BALBUENA</item>
+        <item>MOCTEZUMA</item>
+        <item>SAN LAZARO</item>
+        <item>CANDELARIA</item>
+        <item>MERCED</item>
+        <item>PINO SUAREZ</item>
+        <item>ISABEL LA CATOLICA</item>
+        <item>SALTO DEL AGUA</item>
+        <item>BALDERAS</item>
+        <item>CUAUTÉMOC</item>
+        <item>INSURGENTES</item>
+        <item>SEVILLA</item>
+        <item>CHAPULTEPEC</item>
+        <item>JUANACATLÁN</item>
+        <item>TACUBAYA</item>
+        <item>OBSERVATORIO</item>
+    </string-array>
+
+    <string-array name="Linea2">
+        <item>CUATRO CAMINOS</item>
+        <item>PANTEONES</item>
+        <item>TACUBA</item>
+        <item>CUITLÁHUAC</item>
+        <item>POPOTLA</item>
+        <item>COLEGIO MILITAR</item>
+        <item>NORMAL</item>
+        <item>SAN COSME</item>
+        <item>REVOLUCIÓN</item>
+        <item>HIDALGO</item>
+        <item>BELLAS ARTES</item>
+        <item>ALLENDE</item>
+        <item>ZÓCALO</item>
+        <item>PINO SUAREZ</item>
+        <item>SAN ANTONIO ABAD</item>
+        <item>CHABACANO</item>
+        <item>VIADUCTO</item>
+        <item>XOLA</item>
+        <item>VILLA DE CORTÉS</item>
+        <item>NATIVITAS</item>
+        <item>PORTALES</item>
+        <item>ERMITA</item>
+        <item>GENERAL ANAYA</item>
+        <item>TASQUEÑA</item>
+    </string-array>
+
+    <string-array name="Linea3">
+        <item>INDIOS VERDES</item>
+        <item>DEPORTIVO 18 DE MARZO</item>
+        <item>POTRERO</item>
+        <item>LA RAZA</item>
+        <item>TLATELOLCO</item>
+        <item>GUERRERO</item>
+        <item>HIDALGO</item>
+        <item>JUÁREZ</item>
+        <item>BALDERAS</item>
+        <item>NIÑOS HÉROS</item>
+        <item>HOSPITAL GENERAL</item>
+        <item>CENTRO MEDICO</item>
+        <item>ETIOPÍA</item>
+        <item>EUGENIA</item>
+        <item>DIVISIÓN DEL NORTE</item>
+        <item>ZAPATA</item>
+        <item>COYOACAN</item>
+        <item>VIVEROS</item>
+        <item>MIGUEL ÁNGEL DE QUEVEDO</item>
+        <item>COPILCO</item>
+        <item>UNIVERSIDAD</item>
+    </string-array>
+
+    <string-array name="Linea4">
+        <item>SANTA ANITA</item>
+        <item>JAMAICA</item>
+        <item>FRAY SERVANDO</item>
+        <item>CANDELARIA</item>
+        <item>MARELOS</item>
+        <item>CANAL DEL NORTE</item>
+        <item>CONSULADO</item>
+        <item>BONDOJITO</item>
+        <item>TALISMÁN</item>
+        <item>MARTÍN CARRERA</item>
+    </string-array>
+
+    <string-array name="Linea5">
+        <item>PANTITLAN</item>
+        <item>HANGARES</item>
+        <item>TERMINAL AÉREA</item>
+        <item>OCEANÍA</item>
+        <item>ARAGON</item>
+        <item>EDUARDO MOLINA</item>
+        <item>CONSULADO</item>
+        <item>VALLE GÓMEZ</item>
+        <item>MISTERIOS</item>
+        <item>LA RAZA</item>
+        <item>AUTOBUSES DEL NORTE</item>
+        <item>INSTITUTO DEL PETRÓLEO</item>
+        <item>POLITECNICO</item>
+    </string-array>
+
+    <string-array name="Linea6">
+        <item>EL ROSARIO</item>
+        <item>TEZOZÓMAC</item>
+        <item>AZCAPOTZALCO</item>
+        <item>FERRERÍA/ARENA CIUDAD DE MÉXICO</item>
+        <item>NORTE 45</item>
+        <item>VALLEJO</item>
+        <item>INSTITUTO DEL PETROLEO </item>
+        <item>LINDAVISTA</item>
+        <item>DEPOSTIVO 18 DE MARZO</item>
+        <item>LA VILLA</item>
+        <item>MARTÍN CARRERA</item>
+    </string-array>
+
+    <string-array name="Linea7">
+        <item>EL ROSARIO</item>
+        <item>AQUILES SERDÁN</item>
+        <item>CAMARONES</item>
+        <item>REFINERÍA</item>
+        <item>TACUBA</item>
+        <item>SAN JOAQUÍN</item>
+        <item>POLANCO</item>
+        <item>AUDITORIO</item>
+        <item>CONSITUYENTES</item>
+        <item>TACUBAYA</item>
+        <item>SAN PEDRO DE LOS PINOS</item>
+        <item>SAN ANTONIO</item>
+        <item>MIXCOAC</item>
+        <item>BARRANCA DEL MUERTO</item>
+    </string-array>
+
+    <string-array name="Linea8">
+        <item>GARIBALDI/LAGUNILLA</item>
+        <item>BELLAS ARTES</item>
+        <item>SAN JUAN DE LETRÁN</item>
+        <item>SALTO DEL AGUA</item>
+        <item>DOCTORES</item>
+        <item>OBRERA</item>
+        <item>CHABACANO</item>
+        <item>LA VIFA</item>
+        <item>DANTA ANITA</item>
+        <item>COYUYA</item>
+        <item>IZTACALCO</item>
+        <item>APATLACO</item>
+        <item>ACULCO</item>
+        <item>ESCUADRON 201</item>
+        <item>ATLALILCO</item>
+        <item>IZTAPALAPA</item>
+        <item>CERRO DE LA ESTRELLA</item>
+        <item>UAM-l</item>
+        <item>VILLA CONSTITUCIÓN DE 1917</item>
+    </string-array>
+
+    <string-array name="Linea9">
+        <item>PANTITLAN</item>
+        <item>PUEBLA</item>
+        <item>CIUDAD DEPORTIVA</item>
+        <item>VELÓDROMO</item>
+        <item>MIXIUHCA</item>
+        <item>JAMAICA</item>
+        <item>CHABACANO</item>
+        <item>LÁZARO CÁRDENAS</item>
+        <item>CENTRO MÉDICO</item>
+        <item>CHILPANCINGO</item>
+        <item>PATRIOTISMO</item>
+        <item>TACUBAYA</item>
+    </string-array>
+
+    <string-array name="Linea12">
+        <item>MIXCOAC</item>
+        <item>INSURGENTES SUR</item>
+        <item>HOSPITAL 20 DE NOVIEMBRE</item>
+        <item>ZAPATA</item>
+        <item>PARQUE DE LOS VENADOS</item>
+        <item>EJE CENTRAL</item>
+        <item>ERMITA</item>
+        <item>MEXICALTZINGO</item>
+        <item>ATLALILCO</item>
+        <item>CULHUACÁN</item>
+        <item>SAN ANDRÉS TOMATLÁN</item>
+        <item>LOMAS ESTRELLA</item>
+        <item>CALLA11</item>
+        <item>PERIFÉRICO ORIENTE</item>
+        <item>TEZONCO</item>
+        <item>OLIVOS</item>
+        <item>NOPALERA</item>
+        <item>ZAPOTITLÁN</item>
+        <item>TLALTENCO</item>
+        <item>TLÁHUAC</item>
+    </string-array>
+
+    <string-array name="LineaA">
+        <item>PANTITLAN</item>
+        <item>AGRÍCOLA ORIENTAL</item>
+        <item>CANAL DE SAN JUAN</item>
+        <item>TEPALCATES</item>
+        <item>GUELATAO</item>
+        <item>PEÑÓN VIEJO</item>
+        <item>ACATITLA</item>
+        <item>SANTA MARTA</item>
+        <item>LOS REYES</item>
+        <item>LA PAZ</item>
+    </string-array>
+
+    <string-array name="LineaB">
+        <item>CIUDAD AZTECA</item>
+        <item>PLAZA ARAGÓN</item>
+        <item>OLÍMPICA</item>
+        <item>ECATEPEC</item>
+        <item>MÚZQUIZ</item>
+        <item>RIO DE LOS REMEDIOS</item>
+        <item>IMPULSORA</item>
+        <item>NEZAHUALCÓYOTL</item>
+        <item>VILLA DE ARAGÓN</item>
+        <item>BOSQUES DE ARAGÓN</item>
+        <item>DEPORTIVO DE OCEANÍA</item>
+        <item>OCEANÍA</item>
+        <item>ROMEROO DUBIO</item>
+        <item>RICARDO FLORES MAGÓN</item>
+        <item>SAN LÁZARO</item>
+        <item>MORELOS</item>
+        <item>TEPITO</item>
+        <item>LAGUNILLA</item>
+        <item>GARIBALDI/LAGUNILLA</item>
+        <item>GUERRERO</item>
+        <item>BUENAVISTA</item>
+    </string-array>
+
+    <string-array name="estado_producto">
+        <item>Estándar</item>
+        <item>Promoción</item>
+        <item>Nuevo</item>
+    </string-array>
+
+    <string-array name="Categoria">
+        <item>Categoría</item>
+        <item>BOLSOS Y BACKPACKS </item>
+        <item>MODA</item>
+        <item>BELLEZA</item>
+        <item>RELOJES, LENTES Y JOYERIA </item>
+        <item>ZAPATOS </item>
+        <item>BEBES Y NIÑOS </item>
+        <item>CABALLEROS</item>
+        <item>JUGUETES</item>
+        <item>HOGAR </item>
+        <item>ACCESORIOS ELECTRONICOS </item>
+    </string-array>
+
+</resources>

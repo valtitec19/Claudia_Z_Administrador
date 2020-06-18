@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activitys.NewProduct">
+
+    <TextView
+        android:paddingTop="15dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nuevo_producto"
+        android:textSize="24sp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/nombre_del_producto">
+                <EditText
+                    android:singleLine="true"
+                    android:id="@+id/nombre_del_producto_nuevo"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="top"
+                android:gravity="top"
+                android:hint="Descripción del producto">
+
+                <EditText
+                    android:gravity="top"
+                    android:layout_gravity="top"
+                    android:id="@+id/descripcion_producto"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="$ Precio de Compra">
+                    <EditText
+                        android:singleLine="true"
+                        android:id="@+id/precio_compra_producto_nuevo"
+                        android:digits="0123456789."
+                        android:inputType="numberDecimal"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="$ Precio de Venta">
+                    <EditText
+                        android:singleLine="true"
+                        android:id="@+id/precio_venta_producto_nuevo"
+                        android:digits="0123456789."
+                        android:inputType="numberDecimal"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/cantidad_de_productos">
+                <EditText
+                    android:singleLine="true"
+                    android:digits="0123456789."
+                    android:inputType="numberDecimal"
+                    android:id="@+id/cantidad_nuevo_item"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner_new_product"
+                android:scrollbarSize="26sp">
+
+            </Spinner>
+
+<!--            <Spinner-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/spinner_categoria_new_product"-->
+<!--                android:scrollbarSize="26sp">-->
+
+<!--            </Spinner>-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Categoría">
+                <EditText
+                    android:singleLine="true"
+                    android:id="@+id/new_product_categoria"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="30dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioGroup
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:checked="true"
+                        android:id="@+id/radio_button_inactivo"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Inactivo"/>
+                    <RadioButton
+                        android:id="@+id/radio_button_activo"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Activo"/>
+
+                </RadioGroup>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:padding="5sp"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/imagen_nuevo_producto"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dp"
+                    android:onClick="Subir_foto"
+                    android:padding="15sp"
+                    android:src="@drawable/ic_add_a_photo" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:padding="10sp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:onClick="Aceptar_Nuevo_Producto"
+                    android:id="@+id/add_producto"
+                    android:background="@color/colorPrimary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textColor="@color/white_pres"
+                    android:text="@string/add_producto"/>
+                <Space
+                    android:layout_width="5sp"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:onClick="Cancelar_Nuevo_Producto"
+                    android:id="@+id/cancelar_producto"
+                    android:background="@color/colorPrimary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="16sp"
+                    android:textColor="@color/white_pres"
+                    android:text="@string/cancelar"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

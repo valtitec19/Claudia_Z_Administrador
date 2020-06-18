@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gris"
+    android:padding="10dp"
+    cardview:layout_constraintCircleRadius="10dp"
+    cardview:cardCornerRadius="2sp">
+
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:textSize="24dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ruta"
+                android:id="@+id/nombre_ruta"/>
+
+            <TextView
+                android:textSize="24dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ruta"
+                android:id="@+id/ruta_descripcion"/>
+
+            <TextView
+                android:textSize="24dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ruta"
+                android:id="@+id/ruta_estado"/>
+        </LinearLayout>
+
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="match_parent"
+           android:orientation="vertical">
+           <androidx.appcompat.widget.SwitchCompat
+               android:id="@+id/switch_ruta"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:gravity="center_vertical"
+               android:layout_gravity="center_vertical"/>
+       </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
