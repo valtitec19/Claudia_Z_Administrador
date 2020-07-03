@@ -144,7 +144,11 @@ public class InventoryFragment extends Fragment /*implements SearchView.OnQueryT
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Producto producto = dataSnapshot.getValue(Producto.class);
                 adapterInventory.add_producto(producto);
-
+                if(producto.isEstado()){
+                    adapterInventory2.add_producto(producto);
+                }else {
+                    adapterInventory3.add_producto(producto);
+                }
 
             }
 
