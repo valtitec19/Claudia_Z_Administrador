@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -50,6 +51,8 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import org.w3c.dom.Text;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -73,7 +76,7 @@ public class NewProduct extends AppCompatActivity {
     boolean estado = false;
     Producto producto;
     private RadioButton b_activo, b_inactivo;
-    private EditText tx1, tx2, tx3, tx4, tx5, tx6,edit_categoria;
+    private EditText tx1, tx2, tx3, tx4, tx5, tx6, edit_categoria;
     private Spinner spinner, spinner_categoria;
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
@@ -83,14 +86,52 @@ public class NewProduct extends AppCompatActivity {
     private ImageButton imageButton;
     private ProgressDialog progressDialog;
     private static final int SEND_PHOTO = 1;
-    private ArrayList<String> imagenes=new ArrayList<>();
-    private ArrayList<CharSequence> categorias=new ArrayList<>();
+    private ArrayList<String> imagenes = new ArrayList<>();
+    private ArrayList<String> categorias = new ArrayList<>();
+    private Spinner nueva_categoria_spinner;
+    private TextView nueva_categoria;
+    private String categoria_final;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_product);
         requestMultiplePermissions();
+        nueva_categoria = (TextView) findViewById(R.id.nueva_categoria);
+        nueva_categoria.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final String id_random = UUID.randomUUID().toString();
+                final EditText editText = new EditText(NewProduct.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(NewProduct.this);
+                builder.setTitle("Nueva categoría");
+                builder.setView(editText);
+                builder.setCancelable(false);
+                builder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String categoria_temp = editText.getText().toString();
+                        if (categoria_temp.isEmpty()) {
+                            Toast.makeText(NewProduct.this, "Coloque una categoría valida", Toast.LENGTH_SHORT).show();
+                        } else {
+                            DatabaseReference reference = database.getReference("Categorias");
+                            reference.child(id_random).setValue(categoria_temp);
+                            categoria_final = categoria_temp;
+
+                        }
+
+                    }
+                });
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.create().show();
+            }
+        });
+        nueva_categoria_spinner = (Spinner) findViewById(R.id.spinner_categoria_new_product);
         btn1 = (Button) findViewById(R.id.add_producto);
         btn2 = (Button) findViewById(R.id.cancelar_producto);
         tx1 = (EditText) findViewById(R.id.nombre_del_producto_nuevo);
@@ -98,7 +139,7 @@ public class NewProduct extends AppCompatActivity {
         tx4 = (EditText) findViewById(R.id.precio_compra_producto_nuevo);
         tx5 = (EditText) findViewById(R.id.precio_venta_producto_nuevo);
         tx6 = (EditText) findViewById(R.id.cantidad_nuevo_item);
-        edit_categoria=(EditText)findViewById(R.id.new_product_categoria);
+        //edit_categoria=(EditText)findViewById(R.id.new_product_categoria);
         b_activo = (RadioButton) findViewById(R.id.radio_button_activo);
         b_inactivo = (RadioButton) findViewById(R.id.radio_button_inactivo);
         imageButton = (ImageButton) findViewById(R.id.imagen_nuevo_producto);
@@ -109,13 +150,16 @@ public class NewProduct extends AppCompatActivity {
         databaseReference = database.getReference();//Catalogo de los productos
         inicio_spinners();
 
-        DatabaseReference reference=database.getReference("Categorias");
+        DatabaseReference reference = database.getReference("Categorias");
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                String cat=dataSnapshot.getValue(String.class);
+                String cat = dataSnapshot.getValue(String.class);
                 categorias.add(cat);
-                Log.e("CATEGORIAS ", cat );
+
+                ArrayAdapter<String> categorias_adapter = new ArrayAdapter<String>(NewProduct.this, android.R.layout.simple_spinner_item, categorias);
+                nueva_categoria_spinner.setAdapter(categorias_adapter);
+                Log.e("CATEGORIAS ", cat);
             }
 
             @Override
@@ -152,9 +196,12 @@ public class NewProduct extends AppCompatActivity {
     }
 
     public void Subir_foto(View view) {
-        for(int i=0;i<4;i++){
-            showPictureDialog();
-        }
+//        for (int i = 0; i < 4; i++) {
+//            showPictureDialog();
+//        }
+
+        showPictureDialog();
+
 //        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
 //        intent.setType("image/jpeg");
 //        intent.putExtra(intent.EXTRA_LOCAL_ONLY, true);
@@ -217,7 +264,7 @@ public class NewProduct extends AppCompatActivity {
         inicio_spinners();
         String nombre = tx1.getText().toString();
         String descripcion = tx2.getText().toString();
-        String cat=edit_categoria.getText().toString();
+        //String cat=edit_categoria.getText().toString();
         value = UUID.randomUUID().toString();
         String id = value;
         String foto = imagenes.get(0);
@@ -229,7 +276,7 @@ public class NewProduct extends AppCompatActivity {
         float compra = Float.parseFloat(tx4.getText().toString());
         float venta = Float.parseFloat(tx5.getText().toString());
         int cantidad = Integer.parseInt(tx6.getText().toString());//Integer.parseInt(tx6.getText().toString());
-        producto = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad, estado_producto,cat,imagenes);
+        producto = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad, estado_producto, categoria_final, imagenes);
         return producto;
     }
 
@@ -262,6 +309,18 @@ public class NewProduct extends AppCompatActivity {
             }
         });
 
+
+        nueva_categoria_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                categoria_final = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
 //        ArrayAdapter<CharSequence> adapter_spinner_categoria = ArrayAdapter.createFromResource(this, R.array.Categoria, android.R.layout.simple_spinner_item);
 //        spinner_categoria = (Spinner) findViewById(R.id.spinner_categoria_new_product);
@@ -359,6 +418,22 @@ public class NewProduct extends AppCompatActivity {
                                 progressDialog.dismiss();
                                 Glide.with(NewProduct.this).load(imagenes.get(0)).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(imageButton);
                                 Toast.makeText(NewProduct.this, "Foto subidda con exito", Toast.LENGTH_SHORT).show();
+                                AlertDialog.Builder builder = new AlertDialog.Builder(NewProduct.this);
+                                builder.setTitle("¿Agregar otra foto?");
+                                builder.setCancelable(false);
+                                builder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        showPictureDialog();
+                                    }
+                                });
+                                builder.setNegativeButton("Terminar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                                    }
+                                });
+                                builder.create().show();
 
                             }
                         });
@@ -400,6 +475,22 @@ public class NewProduct extends AppCompatActivity {
                             progressDialog.dismiss();
                             Glide.with(NewProduct.this).load(imagenes.get(0)).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(imageButton);
                             Toast.makeText(NewProduct.this, "Foto subidda con exito", Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(NewProduct.this);
+                            builder.setTitle("¿Agregar otra foto?");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    showPictureDialog();
+                                }
+                            });
+                            builder.setNegativeButton("Terminar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                            builder.create().show();
 
                         }
                     });

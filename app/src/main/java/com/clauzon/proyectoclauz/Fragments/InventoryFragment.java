@@ -137,6 +137,34 @@ public class InventoryFragment extends Fragment /*implements SearchView.OnQueryT
                 startActivity(intent);
             }
         });
+        adapterInventory2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Producto p=adapterInventory2.get_lista().get(recyclerView.getChildAdapterPosition(view));
+                imagenes=adapterInventory3.get_lista().get(recyclerView.getChildAdapterPosition(view)).getImagenes();
+                //String name=p.getNombre_producto();
+                Intent intent = new Intent(getActivity(), EditActivity.class);
+                Producto p_send = generar_producto(p);
+                Log.e("Fotos enviadas", String.valueOf(imagenes.size()));
+                intent.putExtra("name",adapterInventory2.get_lista().get(recyclerView.getChildAdapterPosition(view)).getNombre_producto().toString());
+                intent.putExtra("p_send",p_send);
+                startActivity(intent);
+            }
+        });
+        adapterInventory3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Producto p=adapterInventory3.get_lista().get(recyclerView.getChildAdapterPosition(view));
+                imagenes=adapterInventory3.get_lista().get(recyclerView.getChildAdapterPosition(view)).getImagenes();
+                //String name=p.getNombre_producto();
+                Intent intent = new Intent(getActivity(), EditActivity.class);
+                Producto p_send = generar_producto(p);
+                Log.e("Fotos enviadas", String.valueOf(imagenes.size()));
+                intent.putExtra("name",adapterInventory3.get_lista().get(recyclerView.getChildAdapterPosition(view)).getNombre_producto().toString());
+                intent.putExtra("p_send",p_send);
+                startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(adapterInventory);
 
         databaseReference.addChildEventListener(new ChildEventListener() {

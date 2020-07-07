@@ -1,5 +1,7 @@
 package com.clauzon.proyectoclauz.Activitys;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +33,9 @@ import com.clauzon.proyectoclauz.Clases.AdapterInventory;
 import com.clauzon.proyectoclauz.Clases.Producto;
 import com.clauzon.proyectoclauz.R;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -78,6 +83,7 @@ public class EditActivity extends AppCompatActivity {
     private ArrayList<String> imagenes=new ArrayList<>();
     private ImageView eliminar;
     private float precio_compra,precio_venta;
+    private ArrayList<String> categorias=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +101,8 @@ public class EditActivity extends AppCompatActivity {
         foto_edit = (ImageView) findViewById(R.id.foto_edit);
         b_activo = (RadioButton) findViewById(R.id.radio_button_activo_edit);
         b_inactivo = (RadioButton) findViewById(R.id.radio_button_inactivo_edit);
-//        spinner_categoria=(Spinner)findViewById(R.id.spinner_edit_categoria);
-        edit_categotia=(EditText)findViewById(R.id.edit_product_categoria);
+        spinner_categoria=(Spinner)findViewById(R.id.spinner_edit_categoria);
+        //edit_categotia=(EditText)findViewById(R.id.edit_product_categoria);
         spinner_estado2=(Spinner)findViewById(R.id.spinner_edit_estado2);
         progressDialog = new ProgressDialog(this);
         adapterInventory = new AdapterInventory();
@@ -193,6 +199,11 @@ public class EditActivity extends AppCompatActivity {
 
     public void cargar_producto(Producto p) {
         inicio_spinners();
+//        for(int i=0;i<categorias.size();i++){
+//            if(categorias.get(i).equals(p_recibido.getCategoria())){
+//                spinner_categoria.setSelection(i);
+//            }
+//        }
         if (p.isEstado()) {
             b_activo.setChecked(true);
             b_inactivo.setChecked(false);
@@ -209,10 +220,11 @@ public class EditActivity extends AppCompatActivity {
         precio_compra=p.getCompra_producto();
         precio_venta=p.getVenta_producto();
         compra.setText(String.valueOf(p.getCompra_producto()));
-        edit_categotia.setText(p.getCategoria());
+//        edit_categotia.setText(p.getCategoria());
         //compra.setText("$"+String.valueOf(p.getCompra_producto()));
         venta.setText(String.valueOf(p.getVenta_producto()));
         cantidad.setText(String.valueOf(p.getCantidad_producto()));
+
 
         if(p_recibido.getImagenes().size()>0){
             imagenes.addAll(p_recibido.getImagenes());
@@ -239,7 +251,8 @@ public class EditActivity extends AppCompatActivity {
         String descripcion = this.descripcion.getText().toString();
         String id = p_recibido.getId_producto();
         String foto = "";
-        String cat=edit_categotia.getText().toString();
+        String cat=categoria;
+        //Log.e("Nueva categoria", categoria );
         Boolean estado=p_recibido.isEstado();
         int cantidad = Integer.parseInt(this.cantidad.getText().toString());//Integer.parseInt(tx6.getText().toString());
         if (foto_cambiada == false) {
@@ -254,12 +267,12 @@ public class EditActivity extends AppCompatActivity {
         if (cantidad>0) {
             if(b_activo.isChecked()){
                 estado=true;
-                producto_update = new Producto(nombre, descripcion, id, foto, true, compra, venta, cantidad,estado2,cat,imagenes);
+                producto_update = new Producto(nombre, descripcion, id, foto, true, compra, venta, cantidad,estado2,categoria,imagenes);
                 databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(producto_update);
                 regresar();
             }else{
                 estado=false;
-                producto_update = new Producto(nombre, descripcion, id, foto, false, compra, venta, cantidad,estado2,cat,imagenes);
+                producto_update = new Producto(nombre, descripcion, id, foto, false, compra, venta, cantidad,estado2,categoria,imagenes);
                 databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(producto_update);
                 regresar();
             }
@@ -302,19 +315,51 @@ public class EditActivity extends AppCompatActivity {
     }
 
     public void inicio_spinners(){
-//        ArrayAdapter<CharSequence> adapter_spinner_categoria = ArrayAdapter.createFromResource(this, R.array.Categoria, android.R.layout.simple_spinner_item);
-//        spinner_categoria.setAdapter(adapter_spinner_categoria);
-//        spinner_categoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//                categoria = adapterView.getItemAtPosition(i).toString();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> adapterView) {
-//
-//            }
-//        });
+        spinner_categoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                categoria = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        DatabaseReference reference = database.getReference("Categorias");
+        reference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                String cat = dataSnapshot.getValue(String.class);
+                categorias.add(cat);
+
+                ArrayAdapter<String> categorias_adapter = new ArrayAdapter<String>(EditActivity.this, android.R.layout.simple_spinner_item, categorias);
+                spinner_categoria.setAdapter(categorias_adapter);
+                spinner_categoria.setSelection(categorias_adapter.getPosition(p_recibido.getCategoria()));
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
         ArrayAdapter<CharSequence> adapter_spinner_estado2 = ArrayAdapter.createFromResource(this, R.array.estado_producto, android.R.layout.simple_spinner_item);
         spinner_estado2.setAdapter(adapter_spinner_estado2);
         spinner_estado2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

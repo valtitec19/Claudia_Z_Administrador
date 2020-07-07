@@ -117,26 +117,46 @@
 
             </Spinner>
 
-<!--            <Spinner-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:id="@+id/spinner_categoria_new_product"-->
-<!--                android:scrollbarSize="26sp">-->
-
-<!--            </Spinner>-->
-
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Categoría">
-                <EditText
-                    android:singleLine="true"
-                    android:id="@+id/new_product_categoria"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="horizontal">
+                <Spinner
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/spinner_categoria_new_product"
+                    android:scrollbarSize="26sp">
+
+                </Spinner>
+
+                <TextView
+                    android:id="@+id/nueva_categoria"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nueva"
+                    android:textColor="@color/click"/>
+                <Space
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:hint="Categoría">-->
+<!--                <EditText-->
+<!--                    android:singleLine="true"-->
+<!--                    android:id="@+id/new_product_categoria"-->
+<!--                    android:paddingLeft="10dp"-->
+<!--                    android:paddingTop="30dp"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
