@@ -1,14 +1,19 @@
 package com.clauzon.proyectoclauz.Activitys;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -29,7 +34,9 @@ public class VerPedidoActivity extends AppCompatActivity {
 
     private TextView usuario,descripcon,fecha,lugar,producto,costo,estado_pago,cantidad,hora;
     private ImageView imageView;
-    private RadioButton pendiente,cancelado,entregado;
+    private RadioButton pendiente,enviado;
+    private RadioGroup radioGroup;
+    private EditText envio_confirmado_home;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +61,10 @@ public class VerPedidoActivity extends AppCompatActivity {
         cantidad=(TextView)findViewById(R.id.cantidad_pedido_final);
         imageView=(ImageView) findViewById(R.id.imageView_pedido_finalizado);
         hora=(TextView) findViewById(R.id.hora_pedido_final);
-
+        envio_confirmado_home=(EditText) findViewById(R.id.envio_confirmado_home);
+        radioGroup=(RadioGroup) findViewById(R.id.radiogroup_ver_pedido);
+        pendiente=(RadioButton) findViewById(R.id.pendiente_ver_pedido);
+        enviado=(RadioButton) findViewById(R.id.enviado_ver_pedido);
     }
 
     public void firebaseON(){
@@ -87,7 +97,8 @@ public class VerPedidoActivity extends AppCompatActivity {
                 cantidad.setText(recibido.getCantidad()+" Unidades");
                 Glide.with(VerPedidoActivity.this).load(recibido.getFoto()).centerCrop().override(250, 250)
                         .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
-            }
+
+                            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -113,7 +124,53 @@ public class VerPedidoActivity extends AppCompatActivity {
     }
 
     public void Aceptar(View view) {
-        startActivity(new Intent(VerPedidoActivity.this,MainActivity.class));
-        finish();
+
+        if(enviado.isChecked() && !envio_confirmado_home.getText().toString().isEmpty()){
+            Toast.makeText(this, "Notificación enviada al cliente", Toast.LENGTH_SHORT).show();
+        }else if(enviado.isChecked() && envio_confirmado_home.getText().toString().isEmpty()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(VerPedidoActivity.this);
+            builder.setCancelable(false);
+            builder.setTitle("Envío pendiente").setMessage("No se ha asignado el numero de seguimiento para el cliente");
+            builder.setPositiveButton("Editar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                }
+            });
+            builder.setNegativeButton("Regresar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(VerPedidoActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            builder.create().show();
+        }else if(pendiente.isChecked() && !envio_confirmado_home.getText().toString().isEmpty()){
+            AlertDialog.Builder builder = new AlertDialog.Builder(VerPedidoActivity.this);
+            builder.setCancelable(false);
+            builder.setTitle("Envío pendiente").setMessage("¿El pedido ha sido enviado?");
+            builder.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Toast.makeText(VerPedidoActivity.this, "Notificación enviada al cliente", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(VerPedidoActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            builder.create().show();
+        }else {
+            Toast.makeText(this, "Envío pendiente a entregar", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(VerPedidoActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
     }
 }

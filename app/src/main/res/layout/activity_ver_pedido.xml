@@ -142,6 +142,44 @@
                 android:layout_height="200dp"
                 android:id="@+id/imageView_pedido_finalizado"/>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="No de seguimiento"
+                android:padding="10dp">
+                <EditText
+                    android:singleLine="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/envio_confirmado_home" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RadioGroup
+                    android:padding="5dp"
+                    android:id="@+id/radiogroup_ver_pedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RadioButton
+                        android:checked="true"
+                        android:id="@+id/pendiente_ver_pedido"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Envío pendiente"/>
+                    <RadioButton
+                        android:text="Pedido enviado"
+                        android:id="@+id/enviado_ver_pedido"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </RadioGroup>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

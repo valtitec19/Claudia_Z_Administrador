@@ -14,6 +14,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -63,7 +64,13 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment_inicio= new HomeFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.relative_layout_fragments,fragment_inicio).commit();
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-        recuperar_token_dispositivo();
+        //recuperar_token_dispositivo();
+        FirebaseMessaging.getInstance().subscribeToTopic("domicilio").addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Log.e("TAG", "Suscrito" );
+            }
+        });
     }
 
     @Override
