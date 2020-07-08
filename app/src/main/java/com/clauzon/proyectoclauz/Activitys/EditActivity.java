@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.app.ProgressDialog;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.clauzon.proyectoclauz.Clases.AdapterInventory;
+import com.clauzon.proyectoclauz.Clases.ImageAdapter;
 import com.clauzon.proyectoclauz.Clases.Producto;
 import com.clauzon.proyectoclauz.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -84,6 +86,8 @@ public class EditActivity extends AppCompatActivity {
     private ImageView eliminar;
     private float precio_compra,precio_venta;
     private ArrayList<String> categorias=new ArrayList<>();
+    private ImageAdapter imageAdapter;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +102,7 @@ public class EditActivity extends AppCompatActivity {
         venta = (EditText) findViewById(R.id.precio_venta_producto_edit);
         cantidad = (EditText) findViewById(R.id.cantidad_item_edit);
         acptar = (Button) findViewById(R.id.acptar_edit);
-        foto_edit = (ImageView) findViewById(R.id.foto_edit);
+        //foto_edit = (ImageView) findViewById(R.id.foto_edit);
         b_activo = (RadioButton) findViewById(R.id.radio_button_activo_edit);
         b_inactivo = (RadioButton) findViewById(R.id.radio_button_inactivo_edit);
         spinner_categoria=(Spinner)findViewById(R.id.spinner_edit_categoria);
@@ -194,6 +198,10 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
+        viewPager=(ViewPager)findViewById(R.id.viewPager);
+        imageAdapter=new ImageAdapter(this,imagenes,p_recibido);
+        viewPager.setAdapter(imageAdapter);
+
     }
 
 
@@ -230,12 +238,12 @@ public class EditActivity extends AppCompatActivity {
             imagenes.addAll(p_recibido.getImagenes());
             Log.e("Funciona imagenes", String.valueOf(imagenes.size())  );
         }
-        Glide.with(this).
-                load(p.getFoto_producto())
-                .centerCrop()
-                .override(450, 450)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .into(foto_edit);
+//        Glide.with(this).
+//                load(p.getFoto_producto())
+//                .centerCrop()
+//                .override(450, 450)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .into(foto_edit);
 
 
     }
@@ -303,6 +311,8 @@ public class EditActivity extends AppCompatActivity {
             regresar();
         }
     }
+
+
 
     public void firebaseOn() {
         database = FirebaseDatabase.getInstance();
