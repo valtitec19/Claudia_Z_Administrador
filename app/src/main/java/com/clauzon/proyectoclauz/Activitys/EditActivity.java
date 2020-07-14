@@ -63,7 +63,7 @@ public class EditActivity extends AppCompatActivity {
     private static final String IMAGE_DIRECTORY = "/demonuts";
     private int GALLERY = 1, CAMERA = 2;
     private String url_foto = "";
-    private String categoria,estado2;
+    private String categoria, estado2;
     Boolean foto_cambiada = false;
     private RadioButton b_activo, b_inactivo;
     private ProgressDialog progressDialog;
@@ -77,15 +77,15 @@ public class EditActivity extends AppCompatActivity {
     private String nombre, name;
     private Producto p_recibido;
     private int pos;
-    private Spinner spinner_categoria,spinner_estado2;
-    private EditText nombre_p, descripcion, compra, venta, cantidad,edit_categotia;
+    private Spinner spinner_categoria, spinner_estado2;
+    private EditText nombre_p, descripcion, compra, venta, cantidad, edit_categotia, edit_colores, edit_tamaños, edit_modelos;
     //Firebase
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
-    private ArrayList<String> imagenes=new ArrayList<>();
+    private ArrayList<String> imagenes = new ArrayList<>();
     private ImageView eliminar;
-    private float precio_compra,precio_venta;
-    private ArrayList<String> categorias=new ArrayList<>();
+    private float precio_compra, precio_venta;
+    private ArrayList<String> categorias = new ArrayList<>();
     private ImageAdapter imageAdapter;
     private ViewPager viewPager;
 
@@ -95,25 +95,12 @@ public class EditActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit);
         firebaseOn();
         requestMultiplePermissions();
-        eliminar=(ImageView)findViewById(R.id.eliminar_producto);
-        nombre_p = (EditText) findViewById(R.id.nombre_del_producto_edit);
-        descripcion=(EditText)findViewById(R.id.descripcion_del_producto_edit);
-        compra = (EditText) findViewById(R.id.precio_compra_producto_edit);
-        venta = (EditText) findViewById(R.id.precio_venta_producto_edit);
-        cantidad = (EditText) findViewById(R.id.cantidad_item_edit);
-        acptar = (Button) findViewById(R.id.acptar_edit);
-        //foto_edit = (ImageView) findViewById(R.id.foto_edit);
-        b_activo = (RadioButton) findViewById(R.id.radio_button_activo_edit);
-        b_inactivo = (RadioButton) findViewById(R.id.radio_button_inactivo_edit);
-        spinner_categoria=(Spinner)findViewById(R.id.spinner_edit_categoria);
-        //edit_categotia=(EditText)findViewById(R.id.edit_product_categoria);
-        spinner_estado2=(Spinner)findViewById(R.id.spinner_edit_estado2);
-        progressDialog = new ProgressDialog(this);
+        inicio_views();
         adapterInventory = new AdapterInventory();
         Bundle bundle = getIntent().getExtras();
         Intent i = getIntent();
         p_recibido = (Producto) i.getSerializableExtra("p_send");
-        Log.e("Fotos recibidas", String.valueOf(p_recibido.getImagenes().size()) );
+        //Log.e("Fotos recibidas", String.valueOf(p_recibido.getImagenes().size()) );
         cargar_producto(p_recibido);
         //Toast.makeText(this, p_recibido.getColor_producto(), Toast.LENGTH_SHORT).show();
         name = bundle.getString("name");
@@ -154,8 +141,8 @@ public class EditActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                 b_activo.setChecked(false);
-                 b_inactivo.setChecked(true);
+                b_activo.setChecked(false);
+                b_inactivo.setChecked(true);
 
             }
         });
@@ -198,10 +185,36 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        viewPager=(ViewPager)findViewById(R.id.viewPager);
-        imageAdapter=new ImageAdapter(this,imagenes,p_recibido);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        imageAdapter = new ImageAdapter(this, imagenes, p_recibido);
         viewPager.setAdapter(imageAdapter);
 
+    }
+
+    private void inicio_views() {
+        eliminar = (ImageView) findViewById(R.id.eliminar_producto);
+        nombre_p = (EditText) findViewById(R.id.nombre_del_producto_edit);
+        descripcion = (EditText) findViewById(R.id.descripcion_del_producto_edit);
+        compra = (EditText) findViewById(R.id.precio_compra_producto_edit);
+        venta = (EditText) findViewById(R.id.precio_venta_producto_edit);
+        cantidad = (EditText) findViewById(R.id.cantidad_item_edit);
+        acptar = (Button) findViewById(R.id.acptar_edit);
+        //foto_edit = (ImageView) findViewById(R.id.foto_edit);
+        b_activo = (RadioButton) findViewById(R.id.radio_button_activo_edit);
+        b_inactivo = (RadioButton) findViewById(R.id.radio_button_inactivo_edit);
+        spinner_categoria = (Spinner) findViewById(R.id.spinner_edit_categoria);
+        //edit_categotia=(EditText)findViewById(R.id.edit_product_categoria);
+        spinner_estado2 = (Spinner) findViewById(R.id.spinner_edit_estado2);
+        progressDialog = new ProgressDialog(this);
+        edit_colores = (EditText) findViewById(R.id.colores_del_producto_edit);
+        edit_tamaños = (EditText) findViewById(R.id.tamaños_producto_edit);
+        edit_modelos = (EditText) findViewById(R.id.modelos_producto_edit);
+        edit_colores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(EditActivity.this, "Separa cada valor con una coma ','", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -225,18 +238,45 @@ public class EditActivity extends AppCompatActivity {
         }
         nombre_p.setText(p.getNombre_producto());
         descripcion.setText(p.getDescripcion());
-        precio_compra=p.getCompra_producto();
-        precio_venta=p.getVenta_producto();
+        precio_compra = p.getCompra_producto();
+        precio_venta = p.getVenta_producto();
         compra.setText(String.valueOf(p.getCompra_producto()));
 //        edit_categotia.setText(p.getCategoria());
         //compra.setText("$"+String.valueOf(p.getCompra_producto()));
         venta.setText(String.valueOf(p.getVenta_producto()));
         cantidad.setText(String.valueOf(p.getCantidad_producto()));
+        if (p.getColores() != null) {
+            Log.e("Colores", "recibido");
+            edit_colores.setText("");
+            for (int i = 0; i < p.getColores().size(); i++) {
 
+                edit_colores.setText(p.getColores().get(i) + ", " + edit_colores.getText().toString());
+            }
+        } else {
+            edit_colores.setText("Colores no definidos");
+        }
+        if (p.getTamanos().size() > 0) {
+            edit_tamaños.setText("");
+            for (int i = 0; i < p.getTamanos().size(); i++) {
 
-        if(p_recibido.getImagenes().size()>0){
+                edit_tamaños.setText(p.getTamanos().get(i) + ", " + edit_tamaños.getText().toString());
+            }
+        } else {
+            edit_tamaños.setText("Tamaños no definidos");
+        }
+        if (p.getModelos().size() > 0) {
+            edit_modelos.setText("");
+            for (int i = 0; i < p.getModelos().size(); i++) {
+
+                edit_modelos.setText(p.getModelos().get(i) + ", " + edit_modelos.getText().toString());
+            }
+        } else {
+            edit_modelos.setText("Modelos no definidos");
+        }
+
+        if (p_recibido.getImagenes().size() > 0) {
             imagenes.addAll(p_recibido.getImagenes());
-            Log.e("Funciona imagenes", String.valueOf(imagenes.size())  );
+            Log.e("Funciona imagenes", String.valueOf(imagenes.size()));
         }
 //        Glide.with(this).
 //                load(p.getFoto_producto())
@@ -259,9 +299,39 @@ public class EditActivity extends AppCompatActivity {
         String descripcion = this.descripcion.getText().toString();
         String id = p_recibido.getId_producto();
         String foto = "";
-        String cat=categoria;
+        String cat = categoria;
+        ArrayList<String> array_colres = new ArrayList<>();
+        ArrayList<String> array_tamaños = new ArrayList<>();
+        ArrayList<String> array_modelos = new ArrayList<>();
+        String color = edit_colores.getText().toString();
+        String[] items = color.split(",");
+        for (String item : items) {
+            item=item.trim();
+            if(!item.isEmpty()){
+                array_colres.add(item);
+            }
+        }
+
+        String tamaño = edit_tamaños.getText().toString();
+        String[] items_tamaño = tamaño.split(",");
+        for (String item : items_tamaño) {
+            item=item.trim();
+            if(!item.isEmpty()){
+                array_tamaños.add(item);
+            }
+        }
+
+        String modelos = edit_modelos.getText().toString();
+        String[] items_modelos = modelos.split(",");
+        for (String item : items_modelos) {
+            item=item.trim();
+            if(!item.isEmpty()){
+                array_modelos.add(item);
+            }
+        }
+
         //Log.e("Nueva categoria", categoria );
-        Boolean estado=p_recibido.isEstado();
+        Boolean estado = p_recibido.isEstado();
         int cantidad = Integer.parseInt(this.cantidad.getText().toString());//Integer.parseInt(tx6.getText().toString());
         if (foto_cambiada == false) {
             foto = p_recibido.getFoto_producto();
@@ -272,19 +342,19 @@ public class EditActivity extends AppCompatActivity {
         float compra = Float.parseFloat(this.compra.getText().toString());
         float venta = Float.parseFloat(this.venta.getText().toString());
 
-        if (cantidad>0) {
-            if(b_activo.isChecked()){
-                estado=true;
-                producto_update = new Producto(nombre, descripcion, id, foto, true, compra, venta, cantidad,estado2,categoria,imagenes);
+        if (cantidad > 0) {
+            if (b_activo.isChecked()) {
+                estado = true;
+                producto_update = new Producto(nombre, descripcion, id, foto, true, compra, venta, cantidad, estado2, categoria, imagenes, array_colres, array_tamaños, array_modelos);
                 databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(producto_update);
                 regresar();
-            }else{
-                estado=false;
-                producto_update = new Producto(nombre, descripcion, id, foto, false, compra, venta, cantidad,estado2,categoria,imagenes);
+            } else {
+                estado = false;
+                producto_update = new Producto(nombre, descripcion, id, foto, false, compra, venta, cantidad, estado2, categoria, imagenes, array_colres, array_tamaños, array_modelos);
                 databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(producto_update);
                 regresar();
             }
-        }else if(cantidad==0&&b_activo.isChecked()){
+        } else if (cantidad == 0 && b_activo.isChecked()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
             builder.setCancelable(false);
             builder.setTitle("Cantidad no valida").setMessage("Debe existir al menos 1 un producto para habilitarlo en la tienda");
@@ -304,13 +374,14 @@ public class EditActivity extends AppCompatActivity {
             });
             builder.create().show();
 
-        }else {
-            estado=false;
-            producto_update = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad,estado2,categoria,imagenes);
+        } else {
+            estado = false;
+            producto_update = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad, estado2, categoria, imagenes, array_colres, array_tamaños, array_modelos);
             databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(producto_update);
             regresar();
         }
     }
+
 
 
 
@@ -324,7 +395,7 @@ public class EditActivity extends AppCompatActivity {
         regresar();
     }
 
-    public void inicio_spinners(){
+    public void inicio_spinners() {
         spinner_categoria.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -384,13 +455,13 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        String c=p_recibido.getCategoria();
+        String c = p_recibido.getCategoria();
 //        if (c != null) {
 //            int spinnerPosition = adapter_spinner_categoria.getPosition(c);
 //            spinner_categoria.setSelection(spinnerPosition);
 //        }
 
-        String e2=p_recibido.getEstado_producto();
+        String e2 = p_recibido.getEstado_producto();
         if (e2 != null) {
             int spinnerPosition = adapter_spinner_estado2.getPosition(e2);
             spinner_estado2.setSelection(spinnerPosition);

@@ -11,11 +11,30 @@ public class Producto implements Serializable {
     private int cantidad_producto;
     private String categoria;
     private ArrayList<String> imagenes= new ArrayList<>();
+    private ArrayList<String> colores=new ArrayList<>();
+    private ArrayList<String> tamanos=new ArrayList<>();
+    private ArrayList<String> modelos=new ArrayList<>();
+
+
 
     public Producto() {
     }
 
-    public Producto(String nombre_producto, String descripcion, String id_producto, String foto_producto, boolean estado, float compra_producto, float venta_producto, int cantidad_producto,String estado_producto,String categoria,ArrayList<String> imagenes) {
+//    public Producto(String nombre_producto, String descripcion, String id_producto, String foto_producto, boolean estado, float compra_producto, float venta_producto, int cantidad_producto,String estado_producto,String categoria,ArrayList<String> imagenes) {
+//        this.nombre_producto = nombre_producto;
+//        this.descripcion = descripcion;
+//        this.id_producto = id_producto;
+//        this.foto_producto = foto_producto;
+//        this.estado = estado;
+//        this.compra_producto = compra_producto;
+//        this.venta_producto = venta_producto;
+//        this.cantidad_producto = cantidad_producto;
+//        this.estado_producto=estado_producto;
+//        this.categoria=categoria;
+//        this.imagenes=imagenes;
+//    }
+
+    public Producto(String nombre_producto, String descripcion, String id_producto, String foto_producto, boolean estado, float compra_producto, float venta_producto, int cantidad_producto,String estado_producto,String categoria,ArrayList<String> imagenes,ArrayList<String> colores,ArrayList<String> tamanos,ArrayList<String> modelos) {
         this.nombre_producto = nombre_producto;
         this.descripcion = descripcion;
         this.id_producto = id_producto;
@@ -27,6 +46,9 @@ public class Producto implements Serializable {
         this.estado_producto=estado_producto;
         this.categoria=categoria;
         this.imagenes=imagenes;
+        this.colores=colores;
+        this.tamanos=tamanos;
+        this.modelos=modelos;
     }
 
     public String getNombre_producto() {
@@ -115,5 +137,29 @@ public class Producto implements Serializable {
 
     public void setImagenes(ArrayList<String> imagenes) {
         this.imagenes = imagenes;
+    }
+
+    public ArrayList<String> getColores() {
+        return colores;
+    }
+
+    public void setColores(ArrayList<String> colores) {
+        this.colores = colores;
+    }
+
+    public ArrayList<String> getTamanos() {
+        return tamanos;
+    }
+
+    public void setTamanos(ArrayList<String> tamanos) {
+        this.tamanos = tamanos;
+    }
+
+    public ArrayList<String> getModelos() {
+        return modelos;
+    }
+
+    public void setModelos(ArrayList<String> modelos) {
+        this.modelos = modelos;
     }
 }

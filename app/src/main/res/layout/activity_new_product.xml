@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Activitys.NewProduct">
 
     <TextView
-        android:paddingTop="15dp"
-        android:gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="15dp"
         android:text="@string/nuevo_producto"
-        android:textSize="24sp"/>
+        android:textSize="24sp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,67 +30,172 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/nombre_del_producto">
+
                 <EditText
-                    android:singleLine="true"
+                    android:textColor="@color/black"
                     android:id="@+id/nombre_del_producto_nuevo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
                     android:paddingTop="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="top"
                 android:gravity="top"
                 android:hint="Descripción del producto">
 
                 <EditText
-                    android:gravity="top"
-                    android:layout_gravity="top"
+                    android:textColor="@color/black"
                     android:id="@+id/descripcion_producto"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="30dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_gravity="top"
+                    android:gravity="top"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingLeft="10dp"
+                    android:text="Mas detalles"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:id="@+id/txt_colores"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Colores (Opcional): "/>
+
+                    <ImageButton
+                        android:backgroundTint="@color/black"
+                        android:src="@drawable/ic_add_circle_outline_black_24dp"
+                        android:padding="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mas_colores"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:id="@+id/txt_tamaños"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tamaños (Opcional): "/>
+
+                    <ImageButton
+                        android:backgroundTint="@color/black"
+                        android:src="@drawable/ic_add_circle_outline_black_24dp"
+                        android:padding="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mas_tamaños"/>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:textColor="@color/black"
+                        android:id="@+id/txt_modelos"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Modelos (Opcional): "/>
+
+                    <ImageButton
+                        android:backgroundTint="@color/black"
+                        android:src="@drawable/ic_add_circle_outline_black_24dp"
+                        android:padding="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mas_modelos"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="$ Precio de Compra">
+
                     <EditText
-                        android:singleLine="true"
+                        android:textColor="@color/black"
                         android:id="@+id/precio_compra_producto_nuevo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:digits="0123456789."
                         android:inputType="numberDecimal"
                         android:paddingLeft="10dp"
                         android:paddingTop="30dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint="$ Precio de Venta">
+
                     <EditText
-                        android:singleLine="true"
+                        android:textColor="@color/black"
                         android:id="@+id/precio_venta_producto_nuevo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:digits="0123456789."
                         android:inputType="numberDecimal"
                         android:paddingLeft="10dp"
                         android:paddingTop="30dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:singleLine="true" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -98,65 +205,70 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/cantidad_de_productos">
+
                 <EditText
-                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:id="@+id/cantidad_nuevo_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:digits="0123456789."
                     android:inputType="numberDecimal"
-                    android:id="@+id/cantidad_nuevo_item"
                     android:paddingLeft="10dp"
                     android:paddingTop="30dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Spinner
+                android:id="@+id/spinner_new_product"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner_new_product"
                 android:scrollbarSize="26sp">
 
             </Spinner>
 
             <LinearLayout
-                android:gravity="center"
-                android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="horizontal">
+
                 <Spinner
-                    android:layout_weight="1"
+                    android:id="@+id/spinner_categoria_new_product"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/spinner_categoria_new_product"
+                    android:layout_weight="1"
                     android:scrollbarSize="26sp">
 
                 </Spinner>
 
                 <TextView
+
                     android:id="@+id/nueva_categoria"
-                    android:gravity="center"
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:text="Nueva"
-                    android:textColor="@color/click"/>
+                    android:textColor="@color/click" />
+
                 <Space
                     android:layout_width="10dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:hint="Categoría">-->
-<!--                <EditText-->
-<!--                    android:singleLine="true"-->
-<!--                    android:id="@+id/new_product_categoria"-->
-<!--                    android:paddingLeft="10dp"-->
-<!--                    android:paddingTop="30dp"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content" />-->
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
+            <!--            <com.google.android.material.textfield.TextInputLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:hint="Categoría">-->
+            <!--                <EditText-->
+            <!--                    android:singleLine="true"-->
+            <!--                    android:id="@+id/new_product_categoria"-->
+            <!--                    android:paddingLeft="10dp"-->
+            <!--                    android:paddingTop="30dp"-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content" />-->
+            <!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -164,31 +276,33 @@
                 android:orientation="horizontal">
 
                 <RadioGroup
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
                     <RadioButton
-                        android:checked="true"
                         android:id="@+id/radio_button_inactivo"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Inactivo"/>
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="Inactivo" />
+
                     <RadioButton
                         android:id="@+id/radio_button_activo"
-                        android:layout_weight="1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="Activo"/>
+                        android:layout_weight="1"
+                        android:text="Activo" />
 
                 </RadioGroup>
             </LinearLayout>
 
             <RelativeLayout
-                android:padding="5sp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:padding="5sp">
 
                 <ImageButton
                     android:id="@+id/imagen_nuevo_producto"
@@ -200,35 +314,36 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:padding="10sp"
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10sp">
 
                 <Button
-                    android:onClick="Aceptar_Nuevo_Producto"
                     android:id="@+id/add_producto"
-                    android:background="@color/colorPrimary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
+                    android:background="@color/colorPrimary"
+                    android:onClick="Aceptar_Nuevo_Producto"
+                    android:text="@string/add_producto"
                     android:textColor="@color/white_pres"
-                    android:text="@string/add_producto"/>
+                    android:textSize="16sp" />
+
                 <Space
                     android:layout_width="5sp"
                     android:layout_height="wrap_content" />
 
                 <Button
-                    android:onClick="Cancelar_Nuevo_Producto"
                     android:id="@+id/cancelar_producto"
-                    android:background="@color/colorPrimary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="16sp"
+                    android:background="@color/colorPrimary"
+                    android:onClick="Cancelar_Nuevo_Producto"
+                    android:text="@string/cancelar"
                     android:textColor="@color/white_pres"
-                    android:text="@string/cancelar"/>
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

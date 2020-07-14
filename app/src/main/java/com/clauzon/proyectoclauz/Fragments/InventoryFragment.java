@@ -131,7 +131,7 @@ public class InventoryFragment extends Fragment /*implements SearchView.OnQueryT
                 //String name=p.getNombre_producto();
                 Intent intent = new Intent(getActivity(), EditActivity.class);
                 Producto p_send = generar_producto(p);
-                Log.e("Fotos enviadas", String.valueOf(imagenes.size()));
+                Log.e("Id", p.getId_producto());
                 intent.putExtra("name",adapterInventory.get_lista().get(recyclerView.getChildAdapterPosition(view)).getNombre_producto().toString());
                 intent.putExtra("p_send",p_send);
                 startActivity(intent);
@@ -234,10 +234,13 @@ public class InventoryFragment extends Fragment /*implements SearchView.OnQueryT
         String foto=producto.getFoto_producto();
         Boolean estado=producto.isEstado();
         imagenes=producto.getImagenes();
+        ArrayList<String> array_colres=producto.getColores();
+        ArrayList<String> array_tamaños=producto.getTamanos();
+        ArrayList<String> array_modelos=producto.getModelos();
         float compra = producto.getCompra_producto();
         float venta = producto.getVenta_producto();
         int cantidad = producto.getCantidad_producto();
-        return producto = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad,estado_producto,categoria,imagenes);
+        return producto = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad,estado_producto,categoria,imagenes,array_colres,array_tamaños,array_modelos);
     }
 //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

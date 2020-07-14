@@ -91,6 +91,12 @@ public class NewProduct extends AppCompatActivity {
     private Spinner nueva_categoria_spinner;
     private TextView nueva_categoria;
     private String categoria_final;
+    private ArrayList<String> array_colores=new ArrayList<>();
+    private ArrayList<String> array_tamaños=new ArrayList<>();
+    private ArrayList<String> array_modelos=new ArrayList<>();
+    private ImageButton mas_colores,mas_tamaños,mas_modelos;
+    private TextView colores,tamaños,modelos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,13 +138,7 @@ public class NewProduct extends AppCompatActivity {
             }
         });
         nueva_categoria_spinner = (Spinner) findViewById(R.id.spinner_categoria_new_product);
-        btn1 = (Button) findViewById(R.id.add_producto);
-        btn2 = (Button) findViewById(R.id.cancelar_producto);
-        tx1 = (EditText) findViewById(R.id.nombre_del_producto_nuevo);
-        tx2 = (EditText) findViewById(R.id.descripcion_producto);
-        tx4 = (EditText) findViewById(R.id.precio_compra_producto_nuevo);
-        tx5 = (EditText) findViewById(R.id.precio_venta_producto_nuevo);
-        tx6 = (EditText) findViewById(R.id.cantidad_nuevo_item);
+
         //edit_categoria=(EditText)findViewById(R.id.new_product_categoria);
         b_activo = (RadioButton) findViewById(R.id.radio_button_activo);
         b_inactivo = (RadioButton) findViewById(R.id.radio_button_inactivo);
@@ -149,7 +149,7 @@ public class NewProduct extends AppCompatActivity {
         firebaseStorage = FirebaseStorage.getInstance();
         databaseReference = database.getReference();//Catalogo de los productos
         inicio_spinners();
-
+        inicio_views();
         DatabaseReference reference = database.getReference("Categorias");
         reference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -185,6 +185,72 @@ public class NewProduct extends AppCompatActivity {
         //Toast.makeText(this, String.valueOf(categorias.size()), Toast.LENGTH_SHORT).show();
     }
 
+    private void inicio_views() {
+        btn1 = (Button) findViewById(R.id.add_producto);
+        btn2 = (Button) findViewById(R.id.cancelar_producto);
+        tx1 = (EditText) findViewById(R.id.nombre_del_producto_nuevo);
+        tx2 = (EditText) findViewById(R.id.descripcion_producto);
+        tx4 = (EditText) findViewById(R.id.precio_compra_producto_nuevo);
+        tx5 = (EditText) findViewById(R.id.precio_venta_producto_nuevo);
+        tx6 = (EditText) findViewById(R.id.cantidad_nuevo_item);
+        mas_colores=(ImageButton) findViewById(R.id.mas_colores);
+        mas_modelos=(ImageButton) findViewById(R.id.mas_modelos);
+        mas_tamaños=(ImageButton) findViewById(R.id.mas_tamaños);
+        colores=(TextView) findViewById(R.id.txt_colores);
+        modelos=(TextView) findViewById(R.id.txt_modelos);
+        tamaños=(TextView) findViewById(R.id.txt_tamaños);
+        mas_colores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                añadir_a_selector(colores,array_colores,"color");
+            }
+        });
+        mas_tamaños.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                añadir_a_selector(tamaños,array_tamaños,"tamaño");
+            }
+        });
+        mas_modelos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                añadir_a_selector(modelos,array_modelos,"modelo");
+            }
+        });
+    }
+
+    private void añadir_a_selector(final TextView textView, final ArrayList<String> selector, final String valor){
+        final EditText editText = new EditText(NewProduct.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(NewProduct.this);
+        builder.setTitle("Nuevo "+valor);
+        builder.setMessage("Escriba el nuevo "+valor);
+        builder.setCancelable(false);
+        builder.setView(editText);
+        builder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(editText.getText().toString().isEmpty()){
+                    Toast.makeText(NewProduct.this, valor+" no valido", Toast.LENGTH_SHORT).show();
+                }else {
+                    textView.setText("");
+                    selector.add(editText.getText().toString());
+                    for(int j=0;j<selector.size();j++){
+                        textView.setText(textView.getText().toString()+selector.get(j)+", ");
+                    }
+                    Toast.makeText(NewProduct.this, String.valueOf(selector.size()), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        builder.create().show();
+
+    }
+
     //Funciones
     public void Aceptar_Nuevo_Producto(View view) {
         validacion_producto();
@@ -196,16 +262,8 @@ public class NewProduct extends AppCompatActivity {
     }
 
     public void Subir_foto(View view) {
-//        for (int i = 0; i < 4; i++) {
-//            showPictureDialog();
-//        }
-
         showPictureDialog();
 
-//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//        intent.setType("image/jpeg");
-//        intent.putExtra(intent.EXTRA_LOCAL_ONLY, true);
-//        startActivityForResult(Intent.createChooser(intent, "Selecciona una imagen"), SEND_PHOTO);
     }
 
     public void validacion_producto() {
@@ -276,7 +334,7 @@ public class NewProduct extends AppCompatActivity {
         float compra = Float.parseFloat(tx4.getText().toString());
         float venta = Float.parseFloat(tx5.getText().toString());
         int cantidad = Integer.parseInt(tx6.getText().toString());//Integer.parseInt(tx6.getText().toString());
-        producto = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad, estado_producto, categoria_final, imagenes);
+        producto = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad, estado_producto, categoria_final, imagenes,array_colores,array_tamaños,array_modelos);
         return producto;
     }
 
@@ -348,6 +406,7 @@ public class NewProduct extends AppCompatActivity {
 //            int spinnerPosition = adapter_spinner_estado2.getPosition(e2);
 //            spinner_estado2.setSelection(spinnerPosition);
 //        }
+
     }
 
     //***********///////////***************//////////////////**********************////////////

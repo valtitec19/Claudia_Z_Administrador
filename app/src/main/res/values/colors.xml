@@ -15,5 +15,6 @@
     <color name="utilidades2">#FF4D4D</color>
     <color name="click">#0DA7FF</color>
     <color name="green">#00DB49</color>
+    <color name="transparente">#0000DB49</color>
 
 </resources>
