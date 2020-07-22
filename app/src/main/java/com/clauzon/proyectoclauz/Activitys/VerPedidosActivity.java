@@ -106,7 +106,7 @@ public class VerPedidosActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final Pedidos pedidos = dataSnapshot.getValue(Pedidos.class);
-                producto.setText(pedidos.getNombre());
+                producto.setText(pedidos.getNombre()+" "+pedidos.getColor()+" "+pedidos.getTamano()+" "+pedidos.getModelo());
                 descripcon.setText(pedidos.getDescripcion());
                 lugar.setText(pedidos.getDireccion_entrega());
                 fecha.setText("Fecha: " + pedidos.getFecha());

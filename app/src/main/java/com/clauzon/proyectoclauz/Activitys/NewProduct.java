@@ -95,7 +95,7 @@ public class NewProduct extends AppCompatActivity {
     private ArrayList<String> array_tamaños=new ArrayList<>();
     private ArrayList<String> array_modelos=new ArrayList<>();
     private ImageButton mas_colores,mas_tamaños,mas_modelos;
-    private TextView colores,tamaños,modelos;
+    private EditText colores,tamaños,modelos;
 
 
     @Override
@@ -193,63 +193,43 @@ public class NewProduct extends AppCompatActivity {
         tx4 = (EditText) findViewById(R.id.precio_compra_producto_nuevo);
         tx5 = (EditText) findViewById(R.id.precio_venta_producto_nuevo);
         tx6 = (EditText) findViewById(R.id.cantidad_nuevo_item);
-        mas_colores=(ImageButton) findViewById(R.id.mas_colores);
-        mas_modelos=(ImageButton) findViewById(R.id.mas_modelos);
-        mas_tamaños=(ImageButton) findViewById(R.id.mas_tamaños);
-        colores=(TextView) findViewById(R.id.txt_colores);
-        modelos=(TextView) findViewById(R.id.txt_modelos);
-        tamaños=(TextView) findViewById(R.id.txt_tamaños);
-        mas_colores.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                añadir_a_selector(colores,array_colores,"color");
-            }
-        });
-        mas_tamaños.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                añadir_a_selector(tamaños,array_tamaños,"tamaño");
-            }
-        });
-        mas_modelos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                añadir_a_selector(modelos,array_modelos,"modelo");
-            }
-        });
-    }
 
-    private void añadir_a_selector(final TextView textView, final ArrayList<String> selector, final String valor){
-        final EditText editText = new EditText(NewProduct.this);
-        AlertDialog.Builder builder = new AlertDialog.Builder(NewProduct.this);
-        builder.setTitle("Nuevo "+valor);
-        builder.setMessage("Escriba el nuevo "+valor);
-        builder.setCancelable(false);
-        builder.setView(editText);
-        builder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
+        colores=(EditText) findViewById(R.id.colores_del_producto_new);
+        modelos=(EditText) findViewById(R.id.modelos_producto_new);
+        tamaños=(EditText) findViewById(R.id.tamaños_producto_new);
+
+        colores.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if(editText.getText().toString().isEmpty()){
-                    Toast.makeText(NewProduct.this, valor+" no valido", Toast.LENGTH_SHORT).show();
-                }else {
-                    textView.setText("");
-                    selector.add(editText.getText().toString());
-                    for(int j=0;j<selector.size();j++){
-                        textView.setText(textView.getText().toString()+selector.get(j)+", ");
-                    }
-                    Toast.makeText(NewProduct.this, String.valueOf(selector.size()), Toast.LENGTH_SHORT).show();
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    Toast.makeText(NewProduct.this, "Separa cada valor con una coma ','", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+        tamaños.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // showMyDialog();
+                    Toast.makeText(NewProduct.this, "Separa cada valor con una coma ','", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-        builder.create().show();
+        this.modelos.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // showMyDialog();
+                    Toast.makeText(NewProduct.this, "Separa cada valor con una coma ','", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
 
     }
+
+
 
     //Funciones
     public void Aceptar_Nuevo_Producto(View view) {
@@ -319,6 +299,32 @@ public class NewProduct extends AppCompatActivity {
     }
 
     public Producto generar_producto() {
+        String color = colores.getText().toString();
+        String[] items = color.split(",");
+        for (String item : items) {
+            item=item.trim();
+            if(!item.isEmpty() ){
+                array_colores.add(item);
+            }
+        }
+
+        String tamaño = tamaños.getText().toString();
+        String[] items_tamaño = tamaño.split(",");
+        for (String item : items_tamaño) {
+            item=item.trim();
+            if(!item.isEmpty() ){
+                array_tamaños.add(item);
+            }
+        }
+
+        String modelos = this.modelos.getText().toString();
+        String[] items_modelos = modelos.split(",");
+        for (String item : items_modelos) {
+            item=item.trim();
+            if(!item.isEmpty() ){
+                array_modelos.add(item);
+            }
+        }
         inicio_spinners();
         String nombre = tx1.getText().toString();
         String descripcion = tx2.getText().toString();

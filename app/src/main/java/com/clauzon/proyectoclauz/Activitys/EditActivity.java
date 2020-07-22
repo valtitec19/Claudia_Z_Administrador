@@ -50,6 +50,7 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.muddzdev.styleabletoast.StyleableToast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -209,10 +210,30 @@ public class EditActivity extends AppCompatActivity {
         edit_colores = (EditText) findViewById(R.id.colores_del_producto_edit);
         edit_tamaños = (EditText) findViewById(R.id.tamaños_producto_edit);
         edit_modelos = (EditText) findViewById(R.id.modelos_producto_edit);
-        edit_colores.setOnClickListener(new View.OnClickListener() {
+        edit_colores.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(EditActivity.this, "Separa cada valor con una coma ','", Toast.LENGTH_SHORT).show();
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    Toast.makeText(EditActivity.this, "Separa cada valor con una coma ','", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        edit_tamaños.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // showMyDialog();
+                    Toast.makeText(EditActivity.this, "Separa cada valor con una coma ','", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        edit_modelos.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    // showMyDialog();
+                    Toast.makeText(EditActivity.this, "Separa cada valor con una coma ','", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -245,7 +266,7 @@ public class EditActivity extends AppCompatActivity {
         //compra.setText("$"+String.valueOf(p.getCompra_producto()));
         venta.setText(String.valueOf(p.getVenta_producto()));
         cantidad.setText(String.valueOf(p.getCantidad_producto()));
-        if (p.getColores() != null) {
+        if (p.getColores().size() > 0) {
             Log.e("Colores", "recibido");
             edit_colores.setText("");
             for (int i = 0; i < p.getColores().size(); i++) {
@@ -307,7 +328,7 @@ public class EditActivity extends AppCompatActivity {
         String[] items = color.split(",");
         for (String item : items) {
             item=item.trim();
-            if(!item.isEmpty()){
+            if(!item.isEmpty() && !item.equals("Colores no definidos")){
                 array_colres.add(item);
             }
         }
@@ -316,7 +337,7 @@ public class EditActivity extends AppCompatActivity {
         String[] items_tamaño = tamaño.split(",");
         for (String item : items_tamaño) {
             item=item.trim();
-            if(!item.isEmpty()){
+            if(!item.isEmpty() && !item.equals("Tamaños no definidos")){
                 array_tamaños.add(item);
             }
         }
@@ -325,7 +346,7 @@ public class EditActivity extends AppCompatActivity {
         String[] items_modelos = modelos.split(",");
         for (String item : items_modelos) {
             item=item.trim();
-            if(!item.isEmpty()){
+            if(!item.isEmpty() && !item.equals("Modelos no definidos")){
                 array_modelos.add(item);
             }
         }

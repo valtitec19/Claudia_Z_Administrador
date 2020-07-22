@@ -77,83 +77,44 @@
                     android:text="Mas detalles"
                     android:textSize="16dp" />
 
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="left"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:textColor="@color/black"
-                        android:id="@+id/txt_colores"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Colores">
+                    <EditText
+                        android:singleLine="true"
+                        android:id="@+id/colores_del_producto_new"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Colores (Opcional): "/>
+                        android:padding="5dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageButton
-                        android:backgroundTint="@color/black"
-                        android:src="@drawable/ic_add_circle_outline_black_24dp"
-                        android:padding="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/mas_colores"/>
-
-
-                </LinearLayout>
-
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="left"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:textColor="@color/black"
-                        android:id="@+id/txt_tamaños"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Tamaños">
+                    <EditText
+                        android:singleLine="true"
+                        android:id="@+id/tamaños_producto_new"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Tamaños (Opcional): "/>
+                        android:padding="5dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-                    <ImageButton
-                        android:backgroundTint="@color/black"
-                        android:src="@drawable/ic_add_circle_outline_black_24dp"
-                        android:padding="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/mas_tamaños"/>
-
-
-                </LinearLayout>
-
-                <LinearLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="left"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:textColor="@color/black"
-                        android:id="@+id/txt_modelos"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Modelos">
+                    <EditText
+                        android:singleLine="true"
+                        android:id="@+id/modelos_producto_new"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Modelos (Opcional): "/>
-
-                    <ImageButton
-                        android:backgroundTint="@color/black"
-                        android:src="@drawable/ic_add_circle_outline_black_24dp"
-                        android:padding="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/mas_modelos"/>
-
-
-                </LinearLayout>
+                        android:padding="5dp" />
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 

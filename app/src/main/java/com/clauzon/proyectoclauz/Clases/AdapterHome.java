@@ -48,7 +48,7 @@ public class AdapterHome extends RecyclerView.Adapter<HolderHome> implements Vie
 
     @Override
     public void onBindViewHolder(@NonNull HolderHome holder, int position) {
-        holder.getNombre_recycler_home().setText(lista.get(position).getNombre());
+        holder.getNombre_recycler_home().setText(lista.get(position).getNombre()+" "+lista.get(position).getColor()+" "+lista.get(position).getTamano()+" "+lista.get(position).getModelo());
         holder.getLugar_recycler_home().setText(lista.get(position).getDireccion_entrega());
         holder.getEstado_recycler_home().setText(lista.get(position).getEstado());
         holder.getCantidad_recycler_home().setText(String.valueOf(lista.get(position).getCantidad()));
