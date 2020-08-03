@@ -9,49 +9,51 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="com.clauzon.proyectoclauz.Persistencia"
+        android:name=".Persistencia"
         android:allowBackup="true"
         android:configChanges="screenSize|orientation"
         android:icon="@drawable/claudia"
         android:label="@string/app_name"
         android:roundIcon="@drawable/claudia"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         android:windowSoftInputMode="stateHidden">
+        <activity android:name=".Activitys.NotifiaccionActivity"></activity>
 
         <service
-            android:name="com.clauzon.proyectoclauz.Servicios.FCM"
+            android:name=".Servicios.FCM"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.VerRutaActivity"></activity>
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.LineasActivity" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.NuevaRutaActivity" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.RutasActivity" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.VerPedidoActivity" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.EnvioPedidosActivity" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.PedidosActivity" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.VerPedidosActivity" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.AjustesActivity" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.ActivarRepartidorActivity" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.RepartidoresActivity" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.UtilidadesActivity" />
+        <activity android:name=".Activitys.VerRutaActivity" />
+        <activity android:name=".Activitys.LineasActivity" />
+        <activity android:name=".Activitys.NuevaRutaActivity" />
+        <activity android:name=".Activitys.RutasActivity" />
+        <activity android:name=".Activitys.VerPedidoActivity" />
+        <activity android:name=".Activitys.EnvioPedidosActivity" />
+        <activity android:name=".Activitys.PedidosActivity" />
+        <activity android:name=".Activitys.VerPedidosActivity" />
+        <activity android:name=".Activitys.AjustesActivity" />
+        <activity android:name=".Activitys.ActivarRepartidorActivity" />
+        <activity android:name=".Activitys.RepartidoresActivity" />
+        <activity android:name=".Activitys.UtilidadesActivity" />
         <activity
-            android:name="com.clauzon.proyectoclauz.Activitys.EditActivity"
+            android:name=".Activitys.EditActivity"
             android:theme="@style/NewProduct"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name="com.clauzon.proyectoclauz.Activitys.NewProduct"
+            android:name=".Activitys.NewProduct"
             android:theme="@style/NewProduct"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name="com.clauzon.proyectoclauz.Activitys.MainActivity">
+        <activity android:name=".Activitys.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

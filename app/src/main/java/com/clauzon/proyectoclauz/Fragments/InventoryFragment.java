@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -90,6 +94,8 @@ public class InventoryFragment extends Fragment /*implements SearchView.OnQueryT
 //        });
 //        toolbar = (Toolbar)view.findViewById(R.id.toolbar);
 //        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -205,9 +211,11 @@ public class InventoryFragment extends Fragment /*implements SearchView.OnQueryT
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // TODO Add your menu entries here
+        inflater.inflate(R.menu.manu_toolbar, menu);
+        MenuItem menuItem = menu.findItem(R.id.search_menu);
+        super.onCreateOptionsMenu(menu, inflater);
     }
 
     private void filter(String text) {
@@ -239,8 +247,9 @@ public class InventoryFragment extends Fragment /*implements SearchView.OnQueryT
         ArrayList<String> array_modelos=producto.getModelos();
         float compra = producto.getCompra_producto();
         float venta = producto.getVenta_producto();
+        float oferta = producto.getOferta();
         int cantidad = producto.getCantidad_producto();
-        return producto = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad,estado_producto,categoria,imagenes,array_colres,array_tamaños,array_modelos);
+        return producto = new Producto(nombre, descripcion, id, foto, estado, compra, venta,oferta, cantidad,estado_producto,categoria,imagenes,array_colres,array_tamaños,array_modelos);
     }
 //    @Override
 //    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+    android:background="@color/colorAccent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -15,6 +16,7 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/linear_layout"
         android:padding="5dp"
         android:orientation="vertical"
         android:layout_below="@id/Relative_toolbar_home"
@@ -26,21 +28,21 @@
             android:layout_height="10dp"/>
 
         <Button
-
             android:id="@+id/utilidades"
             android:textSize="22dp"
             android:padding="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Utilidades"
-            android:gravity=""
-            android:background="@color/white"/>
-
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/botones"
+            android:textAllCaps="false"/>
 
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:layout_height="10dp"/>
         <Button
             android:layout_gravity="center_vertical"
             android:id="@+id/rutas"
@@ -49,11 +51,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Rutas"
-            android:gravity="center_vertical"
-            android:background="@color/white"/>
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/botones"
+            android:textAllCaps="false"/>
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:layout_height="10dp"/>
 
         <Button
 
@@ -63,11 +67,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Repartidores"
-            android:gravity=""
-            android:background="@color/white"/>
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/botones"
+            android:textAllCaps="false"/>
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:layout_height="10dp"/>
 
 
         <Button
@@ -78,11 +84,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Pedidos"
-            android:gravity="center_vertical"
-            android:background="@color/white"/>
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@drawable/botones"
+            android:textAllCaps="false"/>
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"/>
+            android:layout_height="10dp"/>
 
 <!--        <Button-->
 <!--            android:layout_gravity="center_vertical"-->
@@ -108,6 +116,23 @@
             android:text="Ajustes"
             android:gravity=""
             android:background="@color/white"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            android:padding="15dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/claudia_z"/>
+        </LinearLayout>
 
     </LinearLayout>
 

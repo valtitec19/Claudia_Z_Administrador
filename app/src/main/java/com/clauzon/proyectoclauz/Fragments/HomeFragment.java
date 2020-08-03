@@ -14,11 +14,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.clauzon.proyectoclauz.Activitys.NotifiaccionActivity;
 import com.clauzon.proyectoclauz.Activitys.RutasActivity;
 import com.clauzon.proyectoclauz.Activitys.VerPedidoActivity;
 import com.clauzon.proyectoclauz.Clases.AdapterHome;
@@ -43,7 +47,7 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private Button button;
-    private FloatingActionButton fab1, fab2;
+    private FloatingActionButton fab1, fab2,fab3;
     private SearchView searchView;
     private List<Producto> lista;
     private Spinner spinner;
@@ -66,10 +70,11 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         //Floating Action Button
         firebaseON();
-        toolbar = (Toolbar)view.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+//        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+//        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         fab1 = (FloatingActionButton) view.findViewById(R.id.action1);
         fab2 = (FloatingActionButton) view.findViewById(R.id.action2);
+        fab3 = (FloatingActionButton) view.findViewById(R.id.action3);
         lista= new ArrayList<>();
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +88,13 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 startActivity(new Intent(getActivity(), RutasActivity.class));
 
+            }
+        });
+
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), NotifiaccionActivity.class));
             }
         });
         //RecyclerView
@@ -110,7 +122,11 @@ public class HomeFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Pedidos pedidos= dataSnapshot.getValue(Pedidos.class);
                 if (pedidos.getEstado().equals("Pago Realizado") || pedidos.getEstado().equals("Pago pendiente (En efectivo)")) {
-                    adapterHome.add_producto(pedidos);
+                    if(pedidos.getCosto_envio()>0){
+                        if(pedidos.getId_compra()==null || pedidos.getId_compra().equals("")){
+                            adapterHome.add_producto(pedidos);
+                        }
+                    }
 
                 }
             }
@@ -166,6 +182,35 @@ public class HomeFragment extends Fragment {
 
         return view;
     }
+
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setHasOptionsMenu(true);
+//    }
+//
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        // TODO Add your menu entries here
+//        inflater.inflate(R.menu.menu_home, menu);
+//        MenuItem menuItem = menu.findItem(R.id.icono_logo);
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+////        if (id == R.id.fav) {
+////            startActivity(new Intent(getActivity(), FavActivity.class));
+////
+////        }
+////        if (id == R.id.car) {
+////            verifica_pedidos();
+////        }
+//        return super.onOptionsItemSelected(item);
+//    }
+
+
     public void firebaseON(){
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference("Pedidos");//Catalogo de los productos

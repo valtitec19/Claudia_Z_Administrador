@@ -16,8 +16,8 @@
 
         <ImageView
             android:src="@drawable/ic_home_black_24dp"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:id="@+id/foto_item"/>
 
         <LinearLayout
@@ -73,6 +73,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="@string/venta"/>
+
+                <TextView
+                    android:id="@+id/precio_oferta"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Oferta"/>
             </LinearLayout>
 
             <LinearLayout
@@ -101,12 +108,10 @@
             <TextView
                 android:focusable="true"
                 android:focusableInTouchMode="true"
-                android:singleLine="true"
                 android:scrollHorizontally="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit ="marquee_forever"
-                android:scrollbars="horizontal"
-                android:maxLines="@integer/google_play_services_version"
+                android:singleLine="true"
                 android:id="@+id/descripcion_item"
                 android:layout_weight="1"
                 android:layout_width="match_parent"

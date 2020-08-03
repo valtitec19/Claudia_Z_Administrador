@@ -7,15 +7,15 @@
     tools:context=".Fragments.InventoryFragment"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <include layout="@layout/toolbar_home"/>-->
+    <include layout="@layout/toolbar"/>
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar_rutas"
-        android:background="@color/colorPrimary"
-        app:title="Inventario"
-        app:titleTextColor="@color/white"/>
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/toolbar_rutas"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        app:title="Inventario"-->
+<!--        app:titleTextColor="@color/white"/>-->
 
     <Spinner
         android:layout_width="match_parent"
@@ -24,6 +24,8 @@
         android:scrollbarSize="20sp">
 
     </Spinner>
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Recycler_Inventory"

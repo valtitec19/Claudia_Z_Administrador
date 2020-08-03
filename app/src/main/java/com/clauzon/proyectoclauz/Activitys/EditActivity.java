@@ -79,7 +79,7 @@ public class EditActivity extends AppCompatActivity {
     private Producto p_recibido;
     private int pos;
     private Spinner spinner_categoria, spinner_estado2;
-    private EditText nombre_p, descripcion, compra, venta, cantidad, edit_categotia, edit_colores, edit_tamaños, edit_modelos;
+    private EditText nombre_p, descripcion, compra, venta, cantidad, edit_categotia, edit_colores, edit_tamaños, edit_modelos,edit_oferta;
     //Firebase
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
@@ -201,6 +201,7 @@ public class EditActivity extends AppCompatActivity {
         cantidad = (EditText) findViewById(R.id.cantidad_item_edit);
         acptar = (Button) findViewById(R.id.acptar_edit);
         //foto_edit = (ImageView) findViewById(R.id.foto_edit);
+        edit_oferta=(EditText)findViewById(R.id.precio_oferta_producto_edit);
         b_activo = (RadioButton) findViewById(R.id.radio_button_activo_edit);
         b_inactivo = (RadioButton) findViewById(R.id.radio_button_inactivo_edit);
         spinner_categoria = (Spinner) findViewById(R.id.spinner_edit_categoria);
@@ -266,6 +267,8 @@ public class EditActivity extends AppCompatActivity {
         //compra.setText("$"+String.valueOf(p.getCompra_producto()));
         venta.setText(String.valueOf(p.getVenta_producto()));
         cantidad.setText(String.valueOf(p.getCantidad_producto()));
+        edit_oferta.setText(String.valueOf(p.getOferta()));
+        //imagenes.addAll(p.getImagenes());
         if (p.getColores().size() > 0) {
             Log.e("Colores", "recibido");
             edit_colores.setText("");
@@ -297,7 +300,7 @@ public class EditActivity extends AppCompatActivity {
 
         if (p_recibido.getImagenes().size() > 0) {
             imagenes.addAll(p_recibido.getImagenes());
-            Log.e("Funciona imagenes", String.valueOf(imagenes.size()));
+            //Log.e("Funciona imagenes", String.valueOf(imagenes.size()));
         }
 //        Glide.with(this).
 //                load(p.getFoto_producto())
@@ -324,6 +327,7 @@ public class EditActivity extends AppCompatActivity {
         ArrayList<String> array_colres = new ArrayList<>();
         ArrayList<String> array_tamaños = new ArrayList<>();
         ArrayList<String> array_modelos = new ArrayList<>();
+
         String color = edit_colores.getText().toString();
         String[] items = color.split(",");
         for (String item : items) {
@@ -362,16 +366,17 @@ public class EditActivity extends AppCompatActivity {
 
         float compra = Float.parseFloat(this.compra.getText().toString());
         float venta = Float.parseFloat(this.venta.getText().toString());
+        float oferta = Float.parseFloat(this.edit_oferta.getText().toString());
 
         if (cantidad > 0) {
             if (b_activo.isChecked()) {
                 estado = true;
-                producto_update = new Producto(nombre, descripcion, id, foto, true, compra, venta, cantidad, estado2, categoria, imagenes, array_colres, array_tamaños, array_modelos);
+                producto_update = new Producto(nombre, descripcion, id, imagenes.get(0), true, compra, venta,oferta, cantidad, estado2, categoria, imagenes, array_colres, array_tamaños, array_modelos);
                 databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(producto_update);
                 regresar();
             } else {
                 estado = false;
-                producto_update = new Producto(nombre, descripcion, id, foto, false, compra, venta, cantidad, estado2, categoria, imagenes, array_colres, array_tamaños, array_modelos);
+                producto_update = new Producto(nombre, descripcion, id, imagenes.get(0), false, compra, venta,oferta, cantidad, estado2, categoria, imagenes, array_colres, array_tamaños, array_modelos);
                 databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(producto_update);
                 regresar();
             }
@@ -397,7 +402,7 @@ public class EditActivity extends AppCompatActivity {
 
         } else {
             estado = false;
-            producto_update = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad, estado2, categoria, imagenes, array_colres, array_tamaños, array_modelos);
+            producto_update = new Producto(nombre, descripcion, id, imagenes.get(0), estado, compra, venta,oferta, cantidad, estado2, categoria, imagenes, array_colres, array_tamaños, array_modelos);
             databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(producto_update);
             regresar();
         }
@@ -556,8 +561,13 @@ public class EditActivity extends AppCompatActivity {
 
                                 foto_cambiada = true;
                                 url_foto = uri.toString();
+                                p_recibido.getImagenes().add(url_foto);
+                                databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(p_recibido);
+                                Intent intent=new Intent(EditActivity.this,EditActivity.class);
+                                intent.putExtra("p_send",p_recibido);
+                                startActivity(intent);
                                 progressDialog.dismiss();
-                                Glide.with(EditActivity.this).load(url_foto).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(foto_edit);
+                                //Glide.with(EditActivity.this).load(url_foto).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(foto_edit);
                                 Toast.makeText(EditActivity.this, "Foto subidda con exito", Toast.LENGTH_SHORT).show();
 
                             }
@@ -599,8 +609,13 @@ public class EditActivity extends AppCompatActivity {
 
                             foto_cambiada = true;
                             url_foto = uri.toString();
+                            p_recibido.getImagenes().add(url_foto);
+                            databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(p_recibido);
+                            Intent intent=new Intent(EditActivity.this,EditActivity.class);
+                            intent.putExtra("p_send",p_recibido);
+                            startActivity(intent);
                             progressDialog.dismiss();
-                            Glide.with(EditActivity.this).load(url_foto).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(foto_edit);
+                            //Glide.with(EditActivity.this).load(url_foto).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL).into(foto_edit);
                             Toast.makeText(EditActivity.this, "Foto subidda con exito", Toast.LENGTH_SHORT).show();
 
                         }
@@ -684,5 +699,9 @@ public class EditActivity extends AppCompatActivity {
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
         return Uri.parse(path);
+    }
+
+    public void añadir_imagen(View view) {
+        showPictureDialog();
     }
 }

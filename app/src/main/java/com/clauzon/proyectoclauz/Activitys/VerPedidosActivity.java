@@ -129,7 +129,11 @@ public class VerPedidosActivity extends AppCompatActivity {
                 }
                 costo.setText("$" + String.valueOf(pedidos.getCosto() * pedidos.getCantidad()));
                 estado_pago.setText(pedidos.getEstado());
-                cantidad.setText(recibido.getCantidad() + " Unidades");
+                if(recibido.getCantidad()==1){
+                    cantidad.setText(recibido.getCantidad() + " Producto");
+                }else {
+                    cantidad.setText(recibido.getCantidad() + " Productos");
+                }
                 Glide.with(VerPedidosActivity.this).load(recibido.getFoto()).centerCrop().override(250, 250)
                         .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
                 databaseReference.child("Repartidores/" + recibido.getRepartidor_id()).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -155,16 +159,12 @@ public class VerPedidosActivity extends AppCompatActivity {
 
             }
         });
-        databaseReference.child("Usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("Usuarios/"+recibido.getUsuario_id()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Usuario u = snapshot.getValue(Usuario.class);
-                    if (u.getId().equals(recibido.getUsuario_id())) {
-                        usuario.setText(u.getNombre() + " " + u.getApellidos());
-                        telefono.setText(u.getTelefono());
-                    }
-                }
+                Usuario u=dataSnapshot.getValue(Usuario.class);
+                usuario.setText(u.getNombre() + " " + u.getApellidos());
+                telefono.setText(u.getTelefono());
             }
 
             @Override

@@ -9,12 +9,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.clauzon.proyectoclauz.Clases.Pedidos;
@@ -26,17 +28,24 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class VerPedidoActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
     private Pedidos recibido;
 
 
-    private TextView usuario,descripcon,fecha,lugar,producto,costo,estado_pago,cantidad,hora;
-    private ImageView imageView;
+    private TextView usuario,descripcon, tipo_envio,producto,costo,cantidad,direccion;
+    private CircleImageView imageView;
     private RadioButton pendiente,enviado;
-    private RadioGroup radioGroup;
-    private EditText envio_confirmado_home;
+    private EditText no_seguimiento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +60,17 @@ public class VerPedidoActivity extends AppCompatActivity {
     }
 
     public void inicio_views(){
-        usuario=(TextView)findViewById(R.id.usuario_pedido_final);
-        descripcon=(TextView)findViewById(R.id.descripcion_pedido_final);
-        fecha=(TextView)findViewById(R.id.fecha_pedido_final);
-        lugar=(TextView)findViewById(R.id.lugar_pedido_final);
-        producto=(TextView)findViewById(R.id.producto_pedido_final);
-        costo=(TextView)findViewById(R.id.costo_pedido);
-        estado_pago=(TextView)findViewById(R.id.total_pedido);
-        cantidad=(TextView)findViewById(R.id.cantidad_pedido_final);
-        imageView=(ImageView) findViewById(R.id.imageView_pedido_finalizado);
-        hora=(TextView) findViewById(R.id.hora_pedido_final);
-        envio_confirmado_home=(EditText) findViewById(R.id.envio_confirmado_home);
-        radioGroup=(RadioGroup) findViewById(R.id.radiogroup_ver_pedido);
-        pendiente=(RadioButton) findViewById(R.id.pendiente_ver_pedido);
-        enviado=(RadioButton) findViewById(R.id.enviado_ver_pedido);
+        usuario=(TextView)findViewById(R.id.cliente_enviar);
+        descripcon=(TextView)findViewById(R.id.descripcion_enviar);
+        tipo_envio=(TextView)findViewById(R.id.tipo_envio_enviar);
+        producto=(TextView)findViewById(R.id.producto_enviar);
+        costo=(TextView)findViewById(R.id.costo_enviar);
+        cantidad=(TextView)findViewById(R.id.cantidad_enviar);
+        imageView=(CircleImageView) findViewById(R.id.circlar_image_enviar);
+        no_seguimiento=(EditText) findViewById(R.id.no_seguimiento);
+        pendiente=(RadioButton) findViewById(R.id.radio_button_envio_pendiente_enviar);
+        enviado=(RadioButton) findViewById(R.id.radio_button_envio_enviado_enviar);
+        direccion=(TextView) findViewById(R.id.direccion_enviar);
     }
 
     public void firebaseON(){
@@ -79,22 +85,30 @@ public class VerPedidoActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Pedidos pedidos=dataSnapshot.getValue(Pedidos.class);
                 producto.setText(pedidos.getNombre());
-                descripcon.setText(pedidos.getDescripcion());
-                lugar.setText(pedidos.getDireccion_entrega());
-                fecha.setText(pedidos.getFecha());
-                if(pedidos.getHora_entrega().equals("")){
-                    hora.setText("no asignada");
-                }else {
-                    hora.setText(pedidos.getHora_entrega());
+                descripcon.setText("");
+                if(pedidos.getColor()!=null && !pedidos.getColor().equals("")){
+                    descripcon.setText(descripcon.getText().toString()+ "Color: "+pedidos.getColor());
                 }
-                if(pedidos.getCosto_envio()>0){
-                    hora.setVisibility(View.GONE);
-                }else{
-                    hora.setVisibility(View.VISIBLE);
+                if(pedidos.getTamano()!=null && !pedidos.getTamano().equals("")){
+                    descripcon.setText(descripcon.getText().toString()+ " Tamaño: "+pedidos.getTamano());
                 }
+                if(pedidos.getModelo()!=null && !pedidos.getModelo().equals("")){
+                    descripcon.setText(descripcon.getText().toString()+" Modelo: "+pedidos.getModelo());
+                }
+                direccion.setText(pedidos.getDireccion_entrega());
                 costo.setText("$"+String.valueOf(pedidos.getCosto()*pedidos.getCantidad()));
-                estado_pago.setText(pedidos.getEstado());
-                cantidad.setText(recibido.getCantidad()+" Unidades");
+                if(recibido.getCantidad()==1){
+                    cantidad.setText(recibido.getCantidad()+" Producto");
+                }else {
+                    cantidad.setText(recibido.getCantidad()+" Productos");
+                }
+                if(recibido.getCosto_envio()==150){
+                    tipo_envio.setText("Al día siguiente, CDMX");
+                }else if(recibido.getCosto_envio()==120){
+                    tipo_envio.setText("Correos de México");
+                }else {
+                    tipo_envio.setText("FedEx");
+                }
                 Glide.with(VerPedidoActivity.this).load(recibido.getFoto()).centerCrop().override(250, 250)
                         .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
 
@@ -111,7 +125,7 @@ public class VerPedidoActivity extends AppCompatActivity {
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                     Usuario u=snapshot.getValue(Usuario.class);
                     if(u.getId().equals(recibido.getUsuario_id())){
-                        usuario.setText("Pedido para "+u.getNombre()+" "+u.getApellidos());
+                        usuario.setText(u.getNombre()+" "+u.getApellidos());
                     }
                 }
             }
@@ -123,11 +137,72 @@ public class VerPedidoActivity extends AppCompatActivity {
         });
     }
 
+    private void crear_notificacion(String token, String titulo, String detalle, String imagen) {
+
+        RequestQueue mRequestQue = Volley.newRequestQueue(this);
+
+        JSONObject json = new JSONObject();
+        try {
+
+            json.put("to", token);
+
+            JSONObject notificationObj = new JSONObject();
+            notificationObj.put("titulo", titulo);
+            notificationObj.put("detalle", detalle);
+            notificationObj.put("imagen", imagen);
+
+
+            //replace notification with data when went send data
+            json.put("data", notificationObj);
+
+            String URL = "https://fcm.googleapis.com/fcm/send";
+            JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, URL,
+                    json, null, null) {
+
+
+                @Override
+                public Map<String, String> getHeaders() {
+                    Map<String, String> header = new HashMap<>();
+                    header.put("content-type", "application/json");
+                    header.put("authorization", "key=AAAAE3HNDFU:APA91bEmPKbwtdaQIrU9g2GmxBEwy7zqHzdwG-L3I7o6HzrKhJ5BupTBTqhN67ytbObOv_NUILcDMaG-HwCLi2tEFKDwOWShs14ZOGpWZOh2DJNhxwjAQIfPtWgn7sxWuDR9VfT4uPQW");
+                    return header;
+                }
+            };
+
+
+            mRequestQue.add(request);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void Aceptar(View view) {
 
-        if(enviado.isChecked() && !envio_confirmado_home.getText().toString().isEmpty()){
+        if(enviado.isChecked() && !no_seguimiento.getText().toString().isEmpty()){
+            recibido.setId_compra(no_seguimiento.getText().toString());
+            databaseReference.child("Pedidos/"+recibido.getId()).setValue(recibido);;
+            databaseReference.child("Usuarios").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                        Usuario u=snapshot.getValue(Usuario.class);
+                        if(u.getId().equals(recibido.getUsuario_id())){
+                            usuario.setText(u.getNombre()+" "+u.getApellidos());
+                            crear_notificacion(u.getToken(),"Tu pedidos ha sido enviado",recibido.getNombre(),recibido.getFoto());
+                        }
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+            startActivity(new Intent(VerPedidoActivity.this,MainActivity.class));
+            finish();
             Toast.makeText(this, "Notificación enviada al cliente", Toast.LENGTH_SHORT).show();
-        }else if(enviado.isChecked() && envio_confirmado_home.getText().toString().isEmpty()){
+        }else if(enviado.isChecked() && no_seguimiento.getText().toString().isEmpty()){
             AlertDialog.Builder builder = new AlertDialog.Builder(VerPedidoActivity.this);
             builder.setCancelable(false);
             builder.setTitle("Envío pendiente").setMessage("No se ha asignado el numero de seguimiento para el cliente");
@@ -146,7 +221,7 @@ public class VerPedidoActivity extends AppCompatActivity {
                 }
             });
             builder.create().show();
-        }else if(pendiente.isChecked() && !envio_confirmado_home.getText().toString().isEmpty()){
+        }else if(pendiente.isChecked() && !no_seguimiento.getText().toString().isEmpty()){
             AlertDialog.Builder builder = new AlertDialog.Builder(VerPedidoActivity.this);
             builder.setCancelable(false);
             builder.setTitle("Envío pendiente").setMessage("¿El pedido ha sido enviado?");

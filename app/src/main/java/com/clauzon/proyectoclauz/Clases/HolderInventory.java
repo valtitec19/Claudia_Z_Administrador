@@ -1,5 +1,6 @@
 package com.clauzon.proyectoclauz.Clases;
 
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +13,7 @@ import com.clauzon.proyectoclauz.R;
 public class HolderInventory extends RecyclerView.ViewHolder {
 
 
-    private TextView nombre_item, precio_compra, precio_venta, categoria,descripcion,estado,cantidad_item,estado2;
+    private TextView nombre_item, precio_compra, precio_venta, categoria,descripcion,estado,cantidad_item,estado2,oferta;
     private ImageView foto_item;
 
     public HolderInventory(@NonNull View itemView) {
@@ -23,10 +24,12 @@ public class HolderInventory extends RecyclerView.ViewHolder {
         precio_venta = (TextView) itemView.findViewById(R.id.precio_venta);
         categoria=(TextView)itemView.findViewById(R.id.categoria_item);
         descripcion=(TextView)itemView.findViewById(R.id.descripcion_item);
+        descripcion.setSelected(true);
         foto_item= (ImageView) itemView.findViewById(R.id.foto_item);
         estado=(TextView)itemView.findViewById(R.id.estado_del_item_);
         cantidad_item=(TextView)itemView.findViewById(R.id.cantidad_de_items);
         estado2=(TextView)itemView.findViewById(R.id.estado_del_item_2);
+        oferta=(TextView)itemView.findViewById(R.id.precio_oferta);
 
     }
 
@@ -100,5 +103,13 @@ public class HolderInventory extends RecyclerView.ViewHolder {
 
     public void setFoto_item(ImageView foto_item) {
         this.foto_item = foto_item;
+    }
+
+    public TextView getOferta() {
+        return oferta;
+    }
+
+    public void setOferta(TextView oferta) {
+        this.oferta = oferta;
     }
 }

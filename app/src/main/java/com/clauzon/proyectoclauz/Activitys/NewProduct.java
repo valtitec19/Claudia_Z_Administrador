@@ -66,9 +66,11 @@ public class NewProduct extends AppCompatActivity {
 
     private static final String IMAGE_DIRECTORY = "/demonuts";
     private int GALLERY = 1, CAMERA = 2;
+    private ProgressDialog progressDialog;
+    private static final int SEND_PHOTO = 1;
+    private String url_foto = "";
     ////////////////***********************************/////////////////************
     private Intent CropIntent;
-    private String url_foto = "";
     private Uri contentURI;
     private boolean val1 = false, val2 = false;
     private Button btn1, btn2;
@@ -84,8 +86,7 @@ public class NewProduct extends AppCompatActivity {
     private StorageReference storageReference;
     private AdapterInventory adapterInventory;
     private ImageButton imageButton;
-    private ProgressDialog progressDialog;
-    private static final int SEND_PHOTO = 1;
+
     private ArrayList<String> imagenes = new ArrayList<>();
     private ArrayList<String> categorias = new ArrayList<>();
     private Spinner nueva_categoria_spinner;
@@ -95,7 +96,7 @@ public class NewProduct extends AppCompatActivity {
     private ArrayList<String> array_tamaños=new ArrayList<>();
     private ArrayList<String> array_modelos=new ArrayList<>();
     private ImageButton mas_colores,mas_tamaños,mas_modelos;
-    private EditText colores,tamaños,modelos;
+    private EditText colores,tamaños,modelos,oferta;
 
 
     @Override
@@ -193,7 +194,7 @@ public class NewProduct extends AppCompatActivity {
         tx4 = (EditText) findViewById(R.id.precio_compra_producto_nuevo);
         tx5 = (EditText) findViewById(R.id.precio_venta_producto_nuevo);
         tx6 = (EditText) findViewById(R.id.cantidad_nuevo_item);
-
+        oferta=(EditText) findViewById(R.id.precio_oferta_producto_nuevo);
         colores=(EditText) findViewById(R.id.colores_del_producto_new);
         modelos=(EditText) findViewById(R.id.modelos_producto_new);
         tamaños=(EditText) findViewById(R.id.tamaños_producto_new);
@@ -248,7 +249,7 @@ public class NewProduct extends AppCompatActivity {
 
     public void validacion_producto() {
         if (tx1.getText().toString().isEmpty() || tx2.getText().toString().isEmpty() || tx5.getText().toString().isEmpty()
-                || tx4.getText().toString().isEmpty()) {
+                || tx4.getText().toString().isEmpty() ||oferta.getText().toString().isEmpty()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Datos incompletos").setMessage("Por favor rellene todos los campos");
             builder.setPositiveButton("Continuar", new DialogInterface.OnClickListener() {
@@ -339,8 +340,9 @@ public class NewProduct extends AppCompatActivity {
         }
         float compra = Float.parseFloat(tx4.getText().toString());
         float venta = Float.parseFloat(tx5.getText().toString());
+        float of = Float.parseFloat(oferta.getText().toString());
         int cantidad = Integer.parseInt(tx6.getText().toString());//Integer.parseInt(tx6.getText().toString());
-        producto = new Producto(nombre, descripcion, id, foto, estado, compra, venta, cantidad, estado_producto, categoria_final, imagenes,array_colores,array_tamaños,array_modelos);
+        producto = new Producto(nombre, descripcion, id, foto, estado, compra, venta,of, cantidad, estado_producto, categoria_final, imagenes,array_colores,array_tamaños,array_modelos);
         return producto;
     }
 

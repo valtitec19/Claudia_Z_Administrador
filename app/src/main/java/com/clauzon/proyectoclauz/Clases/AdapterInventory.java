@@ -1,6 +1,7 @@
 package com.clauzon.proyectoclauz.Clases;
 
 import android.content.Context;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +48,9 @@ public class AdapterInventory extends RecyclerView.Adapter<HolderInventory> impl
     public void onBindViewHolder(@NonNull HolderInventory holder, int position) {
         holder.getNombre_item().setText(lista.get(position).getNombre_producto());
         holder.getDescripcion().setText(lista.get(position).getDescripcion());
-        holder.getPrecio_compra().setText("$" + String.valueOf(lista.get(position).getCompra_producto()));
-        holder.getPrecio_venta().setText("$" + String.valueOf(lista.get(position).getVenta_producto()));
+        //holder.getDescripcion().setMovementMethod(new ScrollingMovementMethod());
+        holder.getPrecio_compra().setText("Compra: " + String.valueOf(lista.get(position).getCompra_producto()));
+        holder.getPrecio_venta().setText("Venta: " + String.valueOf(lista.get(position).getVenta_producto()));
         if (lista.get(position).isEstado() == true) {
             holder.getEstado().setText("Estado: Activo");
         } else if (lista.get(position).isEstado() == false) {
@@ -58,6 +60,7 @@ public class AdapterInventory extends RecyclerView.Adapter<HolderInventory> impl
         holder.getCantidad_item().setText("#" + String.valueOf(lista.get(position).getCantidad_producto()));
         holder.getCategoria().setText(lista.get(position).getCategoria());
         holder.getEstado2().setText(lista.get(position).getEstado_producto());
+        holder.getOferta().setText("Oferta: "+String.valueOf(lista.get(position).getOferta()));
 
     }
 

@@ -1,7 +1,10 @@
 package com.clauzon.proyectoclauz.Clases;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,8 +16,11 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.clauzon.proyectoclauz.Activitys.EditActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -23,6 +29,7 @@ import java.util.ArrayList;
 public class ImageAdapter extends PagerAdapter {
     private Context context;
     private ArrayList<String> imagenes = new ArrayList<>();
+    private ArrayList<String> imagenes_temp;
     private Producto producto;
 
     @Override
@@ -44,7 +51,7 @@ public class ImageAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-        ImageView imageView = new ImageView(context);
+        final ImageView imageView = new ImageView(context);
         Glide.with(context).load(imagenes.get(position)).centerCrop().fitCenter()
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
         container.addView(imageView, 0);
@@ -53,15 +60,26 @@ public class ImageAdapter extends PagerAdapter {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Nueva imagen");
+                builder.setTitle("Eliminar imagen");
                 builder.setCancelable(false);
-                builder.setPositiveButton("Eliminar esta foto", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("¿Desea eliminar esta foto?", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        quitar_imagen(imagenes.get(position));
+                        imagenes_temp=producto.getImagenes();
+                        Log.e("Antes", String.valueOf(imagenes_temp.size()) );
+                        imagenes_temp.remove(imagenes.get(position));
+                        Log.e("Temp", String.valueOf(imagenes_temp.size()) );
+                        producto.setImagenes(imagenes_temp);
+
+                        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                        databaseReference.child("Catalogo Productos").child(producto.getId_producto()).setValue(producto);
+                        Intent intent=new Intent(context,EditActivity.class);
+                        intent.putExtra("p_send",producto);
+                        context.startActivity(intent);
+                        ((Activity)context).finish();
                     }
                 });
-                builder.setNegativeButton("Agregar nueva foto", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -75,28 +93,16 @@ public class ImageAdapter extends PagerAdapter {
 
     }
 
-    private void quitar_imagen(String url) {
+    public ArrayList<String> getArray() {
         // Create a storage reference from our app
-        StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("IMAGENES CATALOGO PRODUCTOS/" + url);
 
-        // Delete the file
-//        storageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                Toast.makeText(context, "Imagen eliminada", Toast.LENGTH_SHORT).show();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception exception) {
-//                // Uh-oh, an error occurred!
-//                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
+        return producto.getImagenes();
     }
 
     @Override
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((ImageView) object);
     }
+
+
 }
