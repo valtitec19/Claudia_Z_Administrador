@@ -15,125 +15,165 @@
         <include layout="@layout/toolbar"/>
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_layout"
-        android:padding="5dp"
-        android:orientation="vertical"
+    <ScrollView
         android:layout_below="@id/Relative_toolbar_home"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.legacy.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <Button
-            android:id="@+id/utilidades"
-            android:textSize="22dp"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Utilidades"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:background="@drawable/botones"
-            android:textAllCaps="false"/>
-
-
-        <androidx.legacy.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-        <Button
-            android:layout_gravity="center_vertical"
-            android:id="@+id/rutas"
-            android:textSize="22dp"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Rutas"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:background="@drawable/botones"
-            android:textAllCaps="false"/>
-        <androidx.legacy.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-        <Button
-
-            android:id="@+id/repartidores"
-            android:textSize="22dp"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Repartidores"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:background="@drawable/botones"
-            android:textAllCaps="false"/>
-        <androidx.legacy.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-
-        <Button
-            android:layout_gravity="center_vertical"
-            android:id="@+id/pedidos"
-            android:textSize="22dp"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pedidos"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:background="@drawable/botones"
-            android:textAllCaps="false"/>
-        <androidx.legacy.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="10dp"/>
-
-<!--        <Button-->
-<!--            android:layout_gravity="center_vertical"-->
-<!--            android:id="@+id/pedidos_envio"-->
-<!--            android:textSize="22dp"-->
-<!--            android:padding="5dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Pedidos pendientes a enviar"-->
-<!--            android:gravity="center_vertical"-->
-<!--            android:background="@color/white"/>-->
-<!--        <androidx.legacy.widget.Space-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="20dp"/>-->
-
-        <Button
-            android:visibility="gone"
-            android:id="@+id/ajustes"
-            android:textSize="22dp"
-            android:padding="5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ajustes"
-            android:gravity=""
-            android:background="@color/white"/>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
+        android:layout_height="wrap_content">
         <LinearLayout
+            android:id="@+id/linear_layout"
             android:padding="15dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:src="@drawable/claudia_z"/>
-        </LinearLayout>
+            android:orientation="vertical"
 
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:padding="15dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:src="@drawable/claudia"/>
+            </LinearLayout>
+
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <Button
+                android:id="@+id/utilidades"
+                android:textSize="22dp"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Utilidades"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/botones"
+                android:textAllCaps="false"/>
+
+
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+            <Button
+                android:layout_gravity="center_vertical"
+                android:id="@+id/rutas"
+                android:textSize="22dp"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rutas"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/botones"
+                android:textAllCaps="false"/>
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <Button
+
+                android:id="@+id/repartidores"
+                android:textSize="22dp"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Repartidores"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/botones"
+                android:textAllCaps="false"/>
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+
+            <Button
+                android:layout_gravity="center_vertical"
+                android:id="@+id/pedidos"
+                android:textSize="22dp"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pedidos"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/botones"
+                android:textAllCaps="false"/>
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+
+            <Button
+                android:layout_gravity="center_vertical"
+                android:id="@+id/ver_categorias_edit"
+                android:textSize="22dp"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Categorías"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/botones"
+                android:textAllCaps="false"/>
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <Button
+                android:layout_gravity="center_vertical"
+                android:id="@+id/btn_notificaciones"
+                android:textSize="22dp"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Notificaciones"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/botones"
+                android:textAllCaps="false"/>
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <!--        <Button-->
+            <!--            android:layout_gravity="center_vertical"-->
+            <!--            android:id="@+id/pedidos_envio"-->
+            <!--            android:textSize="22dp"-->
+            <!--            android:padding="5dp"-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="wrap_content"-->
+            <!--            android:text="Pedidos pendientes a enviar"-->
+            <!--            android:gravity="center_vertical"-->
+            <!--            android:background="@color/white"/>-->
+            <!--        <androidx.legacy.widget.Space-->
+            <!--            android:layout_width="match_parent"-->
+            <!--            android:layout_height="20dp"/>-->
+
+            <Button
+                android:visibility="gone"
+                android:id="@+id/ajustes"
+                android:textSize="22dp"
+                android:padding="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ajustes"
+                android:gravity=""
+                android:background="@color/white"/>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

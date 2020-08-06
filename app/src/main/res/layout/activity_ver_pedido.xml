@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:background="@color/colorAccent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    android:orientation="vertical"
     tools:context=".Activitys.VerPedidoActivity">
+
+
+    <include layout="@layout/toolbar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,37 +18,39 @@
 
 
         <LinearLayout
-            android:padding="5dp"
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="5dp">
 
             <TextView
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:layout_below="@id/Relative_toolbar_home"
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/Relative_toolbar_home"
                 android:gravity="center_horizontal"
                 android:padding="10dp"
-                android:text="Descripcion del pedido"
-                android:textSize="26dp" />
+                android:text="Descripción del pedido"
+                android:textColor="@color/white"
+                android:textSize="26dp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="Cliente: "
-                    android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/cliente_enviar"
                     android:layout_width="wrap_content"
@@ -59,79 +63,111 @@
                     android:textSize="20dp" />
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="Telefono: "
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/cliente_telefono"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="Pedido para"
+                    android:textColor="@color/click"
+                    android:textSize="20dp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:padding="5dp"
-                    android:text="Dirección de entrega:"
-                    android:textStyle="bold"
+                    android:text="Datos de envío: "
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
                 <TextView
-                    android:layout_weight="1"
+                    android:textAlignment="inherit"
                     android:id="@+id/direccion_enviar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="Lugar de entrega"
-                    android:textStyle="bold"
+                    android:textColor="@color/click"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="Tipo de envío: "
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tipo_envio_enviar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="tipo de envio"
                     android:textColor="@color/click"
                     android:textSize="20dp" />
             </LinearLayout>
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <TextView
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:padding="5dp"
-                    android:gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Tipo de envío: "
-                    android:textSize="20dp"/>
 
-                <TextView
-                    android:textColor="@color/click"
-                    android:id="@+id/tipo_envio_enviar"
-                    android:padding="5dp"
-                    android:gravity="center_vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="tipo de envio"
-                    android:textSize="20dp"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="Producto: "
-                    android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/producto_enviar"
                     android:layout_width="wrap_content"
-                    android:layout_weight="1"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="Producto"
@@ -143,15 +179,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
                     android:padding="5dp"
-                    android:text="Descripcion:"
-                    android:textStyle="bold"
+                    android:text="Descripción:"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/descripcion_enviar"
                     android:layout_width="match_parent"
@@ -183,9 +221,9 @@
                     android:scrollHorizontally="true"
                     android:singleLine="true"
                     android:text="Cantidad"
-                    android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/costo_enviar"
@@ -207,105 +245,111 @@
                     android:textStyle="bold" />
             </LinearLayout>
 
+
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="25dp"/>
+                android:layout_height="25dp" />
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:layout_gravity="center_horizontal"
-                android:src="@mipmap/ic_launcher"
+                android:id="@+id/circlar_image_enviar"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:id="@+id/circlar_image_enviar"/>
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_launcher" />
 
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="15dp"/>
+                android:layout_height="15dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="15dp">
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="No de seguimiento"
                     android:background="@drawable/edit_text_style"
+                    android:hint="No de seguimiento"
                     android:textColorHint="@color/white"
                     app:hintTextColor="@color/white">
+
                     <EditText
-                        android:padding="10dp"
-                        android:textColor="@color/white"
-                        android:singleLine="true"
+                        android:id="@+id/no_seguimiento"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/no_seguimiento" />
+                        android:padding="10dp"
+                        android:singleLine="true"
+                        android:textColor="@color/white" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
+
                 <RadioGroup
-                    android:background="@drawable/botones"
-                    android:padding="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:background="@drawable/botones"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
                     <RadioButton
-                        android:shadowColor="@color/white"
-                        android:textColorHint="@color/white"
-                        android:textColorHighlight="@color/white"
-                        android:outlineSpotShadowColor="@color/white"
-                        android:outlineAmbientShadowColor="@color/white"
-                        android:textColorLink="@color/white"
-                        android:textColor="@color/white"
-                        android:checked="true"
                         android:id="@+id/radio_button_envio_pendiente_enviar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Envío pendiente"/>
-                    <RadioButton
-                        android:shadowColor="@color/white"
-                        android:textColorHint="@color/white"
-                        android:textColorHighlight="@color/white"
-                        android:outlineSpotShadowColor="@color/white"
+                        android:checked="true"
                         android:outlineAmbientShadowColor="@color/white"
+                        android:outlineSpotShadowColor="@color/white"
+                        android:shadowColor="@color/white"
+                        android:text="Envío pendiente"
                         android:textColor="@color/white"
-                        android:text="Pedido enviado"
+                        android:textColorHighlight="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textColorLink="@color/white" />
+
+                    <RadioButton
                         android:id="@+id/radio_button_envio_enviado_enviar"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:outlineAmbientShadowColor="@color/white"
+                        android:outlineSpotShadowColor="@color/white"
+                        android:shadowColor="@color/white"
+                        android:text="Pedido enviado"
+                        android:textColor="@color/white"
+                        android:textColorHighlight="@color/white"
+                        android:textColorHint="@color/white" />
                 </RadioGroup>
             </LinearLayout>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="15dp"/>
+                android:layout_height="15dp" />
 
         </LinearLayout>
     </ScrollView>
 
     <Button
-        android:onClick="Aceptar"
         android:id="@+id/btn_aceptar_pedido_enviar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="10dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/botones"
+        android:onClick="Aceptar"
         android:text="Aceptar"
-        android:textSize="20dp"
-        android:textColor="@android:color/white" />
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
 
 
 </LinearLayout>

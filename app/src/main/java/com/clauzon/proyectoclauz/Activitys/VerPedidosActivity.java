@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -106,52 +107,56 @@ public class VerPedidosActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final Pedidos pedidos = dataSnapshot.getValue(Pedidos.class);
-                producto.setText(pedidos.getNombre()+" "+pedidos.getColor()+" "+pedidos.getTamano()+" "+pedidos.getModelo());
-                descripcon.setText(pedidos.getDescripcion());
-                lugar.setText(pedidos.getDireccion_entrega());
-                fecha.setText("Fecha: " + pedidos.getFecha());
-                if (pedidos.getHora_entrega().equals("00:00")) {
-                    hora.setVisibility(View.GONE);
-                } else {
-                    hora.setText(pedidos.getHora_entrega());
-                }
+                try {
+                    producto.setText(pedidos.getNombre()+" "+pedidos.getColor()+" "+pedidos.getTamano()+" "+pedidos.getModelo());
+                    descripcon.setText(pedidos.getDescripcion());
+                    lugar.setText(pedidos.getDireccion_entrega());
+                    fecha.setText("Fecha: " + pedidos.getFecha());
+                    if (pedidos.getHora_entrega().equals("00:00")) {
+                        hora.setVisibility(View.GONE);
+                    } else {
+                        hora.setText(pedidos.getHora_entrega());
+                    }
 
-                if (pedidos.getCosto_envio() == 100) {
-                    tipo_envio.setText("Entrega 3 días");
-                }
-                if (pedidos.getCosto_envio() == 120) {
-                    tipo_envio.setText("Entrega 2 días");
-                }
-                if (pedidos.getCosto_envio() == 150) {
-                    tipo_envio.setText("Entrega 1 días");
-                } else {
-                    tipo_envio.setVisibility(View.GONE);
-                }
-                costo.setText("$" + String.valueOf(pedidos.getCosto() * pedidos.getCantidad()));
-                estado_pago.setText(pedidos.getEstado());
-                if(recibido.getCantidad()==1){
-                    cantidad.setText(recibido.getCantidad() + " Producto");
-                }else {
-                    cantidad.setText(recibido.getCantidad() + " Productos");
-                }
-                Glide.with(VerPedidosActivity.this).load(recibido.getFoto()).centerCrop().override(250, 250)
-                        .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
-                databaseReference.child("Repartidores/" + recibido.getRepartidor_id()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        Repartidor repartidor = dataSnapshot.getValue(Repartidor.class);
-                        if (pedidos.getCosto_envio() == 0) {
-                            repartidor_ver.setText(repartidor.getNombre() + " " + repartidor.getApellidos());
-                        } else {
-                            repartidor_ver.setText("Envío a domicilio");
+                    if (pedidos.getCosto_envio() == 100) {
+                        tipo_envio.setText("Entrega 3 días");
+                    }
+                    if (pedidos.getCosto_envio() == 120) {
+                        tipo_envio.setText("Entrega 2 días");
+                    }
+                    if (pedidos.getCosto_envio() == 150) {
+                        tipo_envio.setText("Entrega 1 días");
+                    } else {
+                        tipo_envio.setVisibility(View.GONE);
+                    }
+                    costo.setText("$" + String.valueOf(pedidos.getCosto() * pedidos.getCantidad()));
+                    estado_pago.setText(pedidos.getEstado());
+                    if(recibido.getCantidad()==1){
+                        cantidad.setText(recibido.getCantidad() + " Producto");
+                    }else {
+                        cantidad.setText(recibido.getCantidad() + " Productos");
+                    }
+                    Glide.with(VerPedidosActivity.this).load(recibido.getFoto()).centerCrop().override(250, 250)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
+                    databaseReference.child("Repartidores/" + recibido.getRepartidor_id()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Repartidor repartidor = dataSnapshot.getValue(Repartidor.class);
+                            if (pedidos.getCosto_envio() == 0) {
+                                repartidor_ver.setText(repartidor.getNombre() + " " + repartidor.getApellidos());
+                            } else {
+                                repartidor_ver.setText("Envío a domicilio");
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(VerPedidosActivity.this, "El pedido no pudo ser cargado, intente mas tarde", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
@@ -163,8 +168,12 @@ public class VerPedidosActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Usuario u=dataSnapshot.getValue(Usuario.class);
-                usuario.setText(u.getNombre() + " " + u.getApellidos());
-                telefono.setText(u.getTelefono());
+                try {
+                    usuario.setText(u.getNombre() + " " + u.getApellidos());
+                    telefono.setText(u.getTelefono());
+                }catch (Exception e){
+
+                }
             }
 
             @Override

@@ -70,22 +70,7 @@ public class AdapterEstacion extends RecyclerView.Adapter<HolderEstacion> implem
     @Override
     public void onBindViewHolder(@NonNull final HolderEstacion holder, final int position) {
         temp_pos = position;
-//        databaseReference.child("Rutas/"+id).addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for(int i=0;i<ruta.getEstaciones().size();i++){
-//                    if(ruta.getEstaciones().get(i).getNombre().equals(list.get(position).getNombre())){
-//                        holder.getCheckBox_estacion().setChecked(true);
-//                    }
-//                }
-//
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
+
         holder.getLinea().setText(list.get(position).getHora());
         holder.getEstacion().setText(list.get(position).getNombre());
         holder.getLinea().setText(list.get(position).getLinea());
@@ -121,7 +106,7 @@ public class AdapterEstacion extends RecyclerView.Adapter<HolderEstacion> implem
                                 if (i1 < 10) {
                                     holder.getLinea().setText(i + ":0" + i1 + "pm");
                                     for (int j = 0; j < new_ruta.size(); j++) {
-                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre())) {
+                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre()) && new_ruta.get(j).getLinea().equals(list.get(position).getLinea())) {
                                             new_ruta.get(j).setHora(i + ":0" + i1 + "pm");
                                             new_ruta.get(j).setFoto(list.get(position).getFoto());
                                         }
@@ -129,7 +114,7 @@ public class AdapterEstacion extends RecyclerView.Adapter<HolderEstacion> implem
                                 } else if (i1 == 0) {
                                     holder.getLinea().setText(i + ":00" + "pm");
                                     for (int j = 0; j < new_ruta.size(); j++) {
-                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre())) {
+                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre()) && new_ruta.get(j).getLinea().equals(list.get(position).getLinea())) {
                                             new_ruta.get(j).setHora(i + ":00" + "pm");
                                             new_ruta.get(j).setFoto(list.get(position).getFoto());
                                         }
@@ -137,7 +122,7 @@ public class AdapterEstacion extends RecyclerView.Adapter<HolderEstacion> implem
                                 } else {
                                     holder.getLinea().setText(i + ":" + i1 + "pm");
                                     for (int j = 0; j < new_ruta.size(); j++) {
-                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre())) {
+                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre()) && new_ruta.get(j).getLinea().equals(list.get(position).getLinea())) {
                                             new_ruta.get(j).setHora(i + ":" + i1 + "pm");
                                             new_ruta.get(j).setFoto(list.get(position).getFoto());
                                         }
@@ -149,7 +134,7 @@ public class AdapterEstacion extends RecyclerView.Adapter<HolderEstacion> implem
                                 if (i1 < 10) {
                                     holder.getLinea().setText(i + ":0" + i1 + "pm");
                                     for (int j = 0; j < new_ruta.size(); j++) {
-                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre())) {
+                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre()) && new_ruta.get(j).getLinea().equals(list.get(position).getLinea())) {
                                             new_ruta.get(j).setHora(i + ":0" + i1 + "pm");
                                             new_ruta.get(j).setFoto(list.get(position).getFoto());
                                         }
@@ -157,7 +142,7 @@ public class AdapterEstacion extends RecyclerView.Adapter<HolderEstacion> implem
                                 } else if (i1 == 0) {
                                     holder.getLinea().setText(i + ":00" + "pm");
                                     for (int j = 0; j < new_ruta.size(); j++) {
-                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre())) {
+                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre()) && new_ruta.get(j).getLinea().equals(list.get(position).getLinea())) {
                                             new_ruta.get(j).setHora(i + ":00" + "pm");
                                             new_ruta.get(j).setFoto(list.get(position).getFoto());
                                         }
@@ -165,7 +150,7 @@ public class AdapterEstacion extends RecyclerView.Adapter<HolderEstacion> implem
                                 } else {
                                     holder.getLinea().setText(i + ":" + i1 + "pm");
                                     for (int j = 0; j < new_ruta.size(); j++) {
-                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre())) {
+                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre()) && new_ruta.get(j).getLinea().equals(list.get(position).getLinea())) {
                                             new_ruta.get(j).setHora(i + ":" + i1 + "pm");
                                             new_ruta.get(j).setFoto(list.get(position).getFoto());
                                         }
@@ -176,7 +161,7 @@ public class AdapterEstacion extends RecyclerView.Adapter<HolderEstacion> implem
                                 if (i1 < 10) {
                                     holder.getLinea().setText(i + ":0" + i1 + "am");
                                     for (int j = 0; j < new_ruta.size(); j++) {
-                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre())) {
+                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre()) && new_ruta.get(j).getLinea().equals(list.get(position).getLinea())) {
                                             new_ruta.get(j).setHora(i + ":0" + i1 + "am");
                                             new_ruta.get(j).setFoto(list.get(position).getFoto());
                                         }
@@ -184,7 +169,7 @@ public class AdapterEstacion extends RecyclerView.Adapter<HolderEstacion> implem
                                 } else if (i1 == 0) {
                                     holder.getLinea().setText(i + ":00" + "am");
                                     for (int j = 0; j < new_ruta.size(); j++) {
-                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre())) {
+                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre()) && new_ruta.get(j).getLinea().equals(list.get(position).getLinea())) {
                                             new_ruta.get(j).setHora(i + ":00" + "am");
                                             new_ruta.get(j).setFoto(list.get(position).getFoto());
 
@@ -193,7 +178,7 @@ public class AdapterEstacion extends RecyclerView.Adapter<HolderEstacion> implem
                                 } else {
                                     holder.getLinea().setText(i + ":" + i1 + "am");
                                     for (int j = 0; j < new_ruta.size(); j++) {
-                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre())) {
+                                        if (new_ruta.get(j).getNombre().equals(list.get(position).getNombre()) && new_ruta.get(j).getLinea().equals(list.get(position).getLinea())) {
                                             new_ruta.get(j).setHora(i + ":" + i1 + "am");
                                             new_ruta.get(j).setFoto(list.get(position).getFoto());
                                         }

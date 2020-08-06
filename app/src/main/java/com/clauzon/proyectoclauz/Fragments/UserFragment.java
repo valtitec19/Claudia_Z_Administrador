@@ -18,10 +18,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.clauzon.proyectoclauz.Activitys.AjustesActivity;
+import com.clauzon.proyectoclauz.Activitys.NotifiaccionActivity;
 import com.clauzon.proyectoclauz.Activitys.PedidosActivity;
 import com.clauzon.proyectoclauz.Activitys.RepartidoresActivity;
 import com.clauzon.proyectoclauz.Activitys.RutasActivity;
 import com.clauzon.proyectoclauz.Activitys.UtilidadesActivity;
+import com.clauzon.proyectoclauz.Activitys.VerCategoriasActivity;
 import com.clauzon.proyectoclauz.Clases.AdapterAdmin;
 import com.clauzon.proyectoclauz.R;
 import com.google.firebase.database.DatabaseReference;
@@ -32,7 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * A simple {@link Fragment} subclass.
  */
 public class UserFragment extends Fragment {
-    private Button utiliddes,repartidores, Pedidos_a_asignar,ajustes,pedidos;
+    private Button utiliddes,repartidores, Pedidos_a_asignar,ajustes,pedidos,categorias,notificaciones;
     private Toolbar toolbar;
     private RecyclerView recyclerView;
     private AdapterAdmin adapterAdmin;
@@ -56,6 +58,20 @@ public class UserFragment extends Fragment {
         utiliddes=(Button)view.findViewById(R.id.utilidades);
         repartidores=(Button)view.findViewById(R.id.repartidores);
         ajustes=(Button)view.findViewById(R.id.ajustes);
+        categorias=(Button)view.findViewById(R.id.ver_categorias_edit);
+        notificaciones=(Button)view.findViewById(R.id.btn_notificaciones);
+        notificaciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), NotifiaccionActivity.class));
+            }
+        });
+        categorias.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), VerCategoriasActivity.class));
+            }
+        });
         rutas=(Button)view.findViewById(R.id.rutas);
         rutas.setOnClickListener(new View.OnClickListener() {
             @Override

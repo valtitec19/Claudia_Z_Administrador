@@ -40,6 +40,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -89,6 +90,7 @@ public class EditActivity extends AppCompatActivity {
     private ArrayList<String> categorias = new ArrayList<>();
     private ImageAdapter imageAdapter;
     private ViewPager viewPager;
+    private ImageView edit_categoria_imageview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -211,6 +213,7 @@ public class EditActivity extends AppCompatActivity {
         edit_colores = (EditText) findViewById(R.id.colores_del_producto_edit);
         edit_tamaños = (EditText) findViewById(R.id.tamaños_producto_edit);
         edit_modelos = (EditText) findViewById(R.id.modelos_producto_edit);
+
         edit_colores.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -242,6 +245,7 @@ public class EditActivity extends AppCompatActivity {
 
     public void cargar_producto(Producto p) {
         inicio_spinners();
+
 //        for(int i=0;i<categorias.size();i++){
 //            if(categorias.get(i).equals(p_recibido.getCategoria())){
 //                spinner_categoria.setSelection(i);
@@ -323,7 +327,7 @@ public class EditActivity extends AppCompatActivity {
         String descripcion = this.descripcion.getText().toString();
         String id = p_recibido.getId_producto();
         String foto = "";
-        String cat = categoria;
+        String cat = categoria.trim();
         ArrayList<String> array_colres = new ArrayList<>();
         ArrayList<String> array_tamaños = new ArrayList<>();
         ArrayList<String> array_modelos = new ArrayList<>();
@@ -406,6 +410,18 @@ public class EditActivity extends AppCompatActivity {
             databaseReference.child("Catalogo Productos").child(p_recibido.getId_producto()).setValue(producto_update);
             regresar();
         }
+
+
+//        String categorias = edit_categorias.getText().toString();
+//        ArrayList<String> new_categorias=new ArrayList<>();
+//        String[] items_cat = categorias.split(",");
+//        for (String item : items_cat) {
+//            item=item.trim();
+//            if(!item.isEmpty()){
+//                new_categorias.add(item);
+//            }
+//        }
+//        databaseReference.child("Categorias").setValue(new_categorias);
     }
 
 

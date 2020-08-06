@@ -18,27 +18,20 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/Recycler_Home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/Relative_toolbar_home">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
     <LinearLayout
-        android:padding="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true">
+        android:id="@+id/lin"
+        android:layout_below="@+id/Relative_toolbar_home"
+        android:layout_width="match_parent"
+        android:layout_height="500dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Recycler_Home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
 
-        <de.hdodenhof.circleimageview.CircleImageView
-
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/claudia_z" />
+        </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
+
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:layout_width="wrap_content"

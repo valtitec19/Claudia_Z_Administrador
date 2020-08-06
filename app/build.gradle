@@ -66,6 +66,8 @@ dependencies {
 
     implementation 'com.muddzdev:styleabletoast:2.2.3'
 
+    implementation 'me.biubiubiu.justifytext:library:1.1'
+
 }
 apply plugin: 'io.fabric'
 apply plugin: 'com.google.gms.google-services'

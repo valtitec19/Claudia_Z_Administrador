@@ -52,7 +52,11 @@ public class AdapterPedidos extends RecyclerView.Adapter<HolderPedidos> implemen
 
 //        if(lista.get(position).getEstado().equals("Pago pendiente (En efectivo)") || lista.get(position).getEstado().equals("Pagado")){
         holder.getProductos_pedido().setText(lista.get(position).getNombre());
-        holder.getLugar().setText("Lugar: " + lista.get(position).getDireccion_entrega());
+        if(lista.get(position).getCosto_envio()==0){
+            holder.getLugar().setText("Lugar: " + lista.get(position).getDireccion_entrega());
+        }else {
+            holder.getLugar().setText("Datos de envío: " + lista.get(position).getDireccion_entrega());
+        }
         holder.getFecha().setText("Fecha: " + lista.get(position).getFecha());
         if (lista.get(position).getHora_entrega().equals("00:00")) {
             holder.getHora().setVisibility(View.GONE);

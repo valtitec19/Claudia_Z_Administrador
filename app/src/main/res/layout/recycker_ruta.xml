@@ -11,6 +11,8 @@
     cardview:cardCornerRadius="2sp">
 
     <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -71,6 +73,7 @@
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_keyboard_arrow_right_black_24dp" />
                     <TextView
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tiempo"
@@ -103,10 +106,14 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
+            android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="center">
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"/>
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch_ruta"
                 android:layout_gravity="center"
@@ -115,8 +122,9 @@
                 android:layout_height="wrap_content"/>
             <androidx.legacy.widget.Space
                 android:layout_width="wrap_content"
-                android:layout_height="25dp"/>
+                android:layout_height="10dp"/>
             <Button
+                android:layout_gravity="center_horizontal"
                 android:id="@+id/editar_ruta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,6 +132,18 @@
                 android:textStyle="bold"
                 android:text="Ver Ruta"
                 android:background="@color/colorPrimary"/>
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"/>
+<!--            <Button-->
+<!--                android:padding="3dp"-->
+<!--                android:id="@+id/borrar_ruta"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:textStyle="bold"-->
+<!--                android:text="Borrar Ruta"-->
+<!--                android:background="@color/colorPrimary"/>-->
 
         </LinearLayout>
     </LinearLayout>
